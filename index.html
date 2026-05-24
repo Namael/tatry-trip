@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tatras 2026 — Family Adventure</title>
+<title>Mountains 2026 — Family Adventure</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap');
 
@@ -40,10 +40,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  a { color: var(--water); }
+
   /* ─── HERO ─── */
   .hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,85 +53,41 @@
     text-align: center;
     padding: 2rem;
     overflow: hidden;
-    background: linear-gradient(165deg, #0f2027 0%, #1a3a5c 30%, #2d5a8e 60%, #5bb5d5 100%);
   }
 
-  .hero::before {
-    content: '';
+  .hero-bg {
     position: absolute;
     inset: 0;
-    background:
-      radial-gradient(ellipse 120% 60% at 50% 100%, rgba(45,90,142,0.9) 0%, transparent 70%),
-      radial-gradient(ellipse 80% 40% at 30% 80%, rgba(122,182,72,0.3) 0%, transparent 60%);
-    z-index: 1;
-  }
-
-  .mountains-bg {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
+    background: url('https://images.unsplash.com/photo-1550435443-33e0d1e69b3e?w=1400&q=80&auto=format&fit=crop') center/cover no-repeat;
     z-index: 0;
   }
 
-  .mountain {
+  .hero-bg::after {
+    content: '';
     position: absolute;
-    bottom: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .mountain-1 {
-    left: -5%;
-    border-left: 35vw solid transparent;
-    border-right: 35vw solid transparent;
-    border-bottom: 50vh solid #1a2d1a;
-    opacity: 0.4;
-  }
-  .mountain-2 {
-    left: 15%;
-    border-left: 30vw solid transparent;
-    border-right: 30vw solid transparent;
-    border-bottom: 58vh solid #243824;
-    opacity: 0.35;
-  }
-  .mountain-3 {
-    right: -10%;
-    border-left: 40vw solid transparent;
-    border-right: 25vw solid transparent;
-    border-bottom: 55vh solid #1e3020;
-    opacity: 0.3;
-  }
-  .mountain-snow {
-    left: 20%;
-    border-left: 22vw solid transparent;
-    border-right: 22vw solid transparent;
-    border-bottom: 45vh solid rgba(255,255,255,0.08);
+    inset: 0;
+    background: linear-gradient(180deg, rgba(15,32,43,0.55) 0%, rgba(26,58,92,0.7) 50%, rgba(15,32,43,0.85) 100%);
   }
 
   .stars {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 50%;
-    z-index: 0;
+    top: 0; left: 0; right: 0;
+    height: 40%;
+    z-index: 1;
     overflow: hidden;
   }
 
   .star {
     position: absolute;
-    width: 2px;
-    height: 2px;
+    width: 2px; height: 2px;
     background: white;
     border-radius: 50%;
     animation: twinkle 3s infinite;
   }
 
   @keyframes twinkle {
-    0%, 100% { opacity: 0.2; }
-    50% { opacity: 1; }
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.9; }
   }
 
   .hero-content {
@@ -161,7 +119,7 @@
     color: white;
     line-height: 1.1;
     margin-bottom: 0.75rem;
-    text-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    text-shadow: 0 2px 30px rgba(0,0,0,0.4);
   }
 
   .hero h1 span {
@@ -191,10 +149,6 @@
     gap: 6px;
   }
 
-  .hero-detail .icon {
-    font-size: 1.2rem;
-  }
-
   .hero-family {
     display: flex;
     gap: 1rem;
@@ -214,21 +168,9 @@
     color: white;
   }
 
-  .family-member .emoji {
-    font-size: 1.8rem;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .family-member .name {
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .family-member .age {
-    font-size: 0.75rem;
-    opacity: 0.7;
-  }
+  .family-member .emoji { font-size: 1.8rem; display: block; margin-bottom: 4px; }
+  .family-member .name { font-weight: 600; font-size: 0.9rem; }
+  .family-member .age { font-size: 0.75rem; opacity: 0.7; }
 
   .scroll-hint {
     position: absolute;
@@ -242,14 +184,7 @@
     gap: 4px;
     animation: bounce 2s infinite;
     cursor: pointer;
-  }
-
-  .scroll-hint svg {
-    width: 24px;
-    height: 24px;
-    stroke: currentColor;
-    fill: none;
-    stroke-width: 2;
+    text-decoration: none;
   }
 
   @keyframes bounce {
@@ -257,103 +192,167 @@
     50% { transform: translateY(6px); }
   }
 
-  /* ─── NAV ─── */
-  .nav {
+  /* ─── TAB NAV ─── */
+  .tab-nav {
     position: sticky;
     top: 0;
     z-index: 100;
-    background: rgba(255,255,255,0.92);
+    background: rgba(255,255,255,0.96);
     backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--border);
-    padding: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    padding: 12px;
   }
-  .nav::-webkit-scrollbar { display: none; }
 
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    gap: 0;
-    max-width: 1200px;
+  .tab-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    max-width: 900px;
     margin: 0 auto;
-    padding: 0 1rem;
-    min-width: max-content;
   }
 
-  .nav a {
+  @media (min-width: 700px) {
+    .tab-grid { grid-template-columns: repeat(8, 1fr); }
+  }
+
+  .tab-btn {
     display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 14px 16px;
-    text-decoration: none;
-    color: var(--text-muted);
-    font-size: 0.85rem;
-    font-weight: 500;
-    white-space: nowrap;
-    border-bottom: 2px solid transparent;
-    transition: all 0.2s;
-  }
-
-  .nav a:hover, .nav a.active {
-    color: var(--sky);
-    border-bottom-color: var(--sky);
-  }
-
-  .nav a .nav-icon {
-    font-size: 1.1rem;
-  }
-
-  /* ─── MAIN ─── */
-  .main {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 2rem 1.25rem 4rem;
-  }
-
-  /* ─── SECTIONS ─── */
-  .section {
-    margin-bottom: 3rem;
-  }
-
-  .section-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 1.5rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--border);
-  }
-
-  .section-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
-    flex-shrink: 0;
-  }
-
-  .section-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.6rem;
+    gap: 3px;
+    padding: 10px 4px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.7rem;
     font-weight: 600;
-    color: var(--sky);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .section-header h2 small {
+  .tab-btn .tab-icon { font-size: 1.4rem; }
+
+  .tab-btn:hover {
+    border-color: var(--sky-light);
+    color: var(--sky);
+    background: rgba(42,90,150,0.04);
+  }
+
+  .tab-btn.active {
+    border-color: var(--sky);
+    background: var(--sky);
+    color: white;
+    box-shadow: 0 2px 12px rgba(26,58,92,0.3);
+  }
+
+  /* ─── TAB PANELS ─── */
+  .tab-panel {
+    display: none;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.25rem 4rem;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .tab-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── SECTION BANNER ─── */
+  .section-banner {
+    position: relative;
+    height: 200px;
+    margin: 0 -1.25rem;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .section-banner img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .section-banner::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.15) 100%);
+  }
+
+  .section-banner .banner-text {
+    position: relative;
+    z-index: 1;
+    padding: 20px 24px;
+    color: white;
+  }
+
+  .section-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.4);
+  }
+
+  .section-banner h2 small {
     display: block;
     font-family: 'Inter', sans-serif;
-    font-size: 0.55em;
+    font-size: 0.45em;
     font-weight: 400;
-    color: var(--text-muted);
-    margin-top: 2px;
+    opacity: 0.85;
+    margin-top: 4px;
+    text-shadow: none;
   }
 
-  /* ─── ITINERARY CARDS ─── */
+  @media (max-width: 640px) {
+    .section-banner { height: 160px; }
+    .section-banner h2 { font-size: 1.4rem; }
+  }
+
+  /* ─── CONTENT SHARED ─── */
+  .content-section { margin-top: 1.5rem; margin-bottom: 2rem; }
+
+  .tip-box {
+    background: rgba(58,143,183,0.06);
+    border-left: 3px solid var(--water);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, rgba(232,168,56,0.08), rgba(232,93,58,0.06));
+    border-left: 3px solid var(--gold);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  .warning-box {
+    background: rgba(232,93,58,0.06);
+    border-left: 3px solid var(--sunset);
+    padding: 12px 16px;
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+  }
+
+  /* ─── DAY CARDS ─── */
   .day-card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -364,8 +363,13 @@
     border: 1px solid var(--border);
   }
 
-  .day-card:hover {
-    box-shadow: var(--shadow-hover);
+  .day-card:hover { box-shadow: var(--shadow-hover); }
+
+  .day-card-photo {
+    height: 140px;
+    width: 100%;
+    object-fit: cover;
+    display: block;
   }
 
   .day-header {
@@ -376,15 +380,13 @@
     cursor: pointer;
     user-select: none;
     transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .day-header:hover {
-    background: rgba(0,0,0,0.02);
-  }
+  .day-header:hover { background: rgba(0,0,0,0.02); }
 
   .day-num {
-    width: 48px;
-    height: 48px;
+    width: 48px; height: 48px;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -405,18 +407,12 @@
     letter-spacing: 0.05em;
   }
 
-  .day-info {
-    flex: 1;
-    min-width: 0;
-  }
+  .day-info { flex: 1; min-width: 0; }
 
   .day-title {
     font-weight: 600;
     font-size: 1.05rem;
     color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 8px;
   }
 
   .day-subtitle {
@@ -444,14 +440,10 @@
     color: var(--sky-light);
   }
 
-  .tag.highlight {
-    background: rgba(232,168,56,0.12);
-    color: #b07d1a;
-  }
+  .tag.gold { background: rgba(232,168,56,0.12); color: #b07d1a; }
 
   .chevron {
-    width: 20px;
-    height: 20px;
+    width: 20px; height: 20px;
     stroke: var(--text-muted);
     fill: none;
     stroke-width: 2;
@@ -459,9 +451,7 @@
     flex-shrink: 0;
   }
 
-  .day-card.open .chevron {
-    transform: rotate(180deg);
-  }
+  .day-card.open .chevron { transform: rotate(180deg); }
 
   .day-body {
     max-height: 0;
@@ -469,74 +459,11 @@
     transition: max-height 0.4s ease;
   }
 
-  .day-card.open .day-body {
-    max-height: 5000px;
-  }
+  .day-card.open .day-body { max-height: 6000px; }
 
   .day-content {
     padding: 0 20px 20px;
     border-top: 1px solid var(--border);
-  }
-
-  .schedule {
-    margin: 1rem 0;
-  }
-
-  .schedule-item {
-    display: flex;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.04);
-    align-items: flex-start;
-  }
-
-  .schedule-item:last-child {
-    border-bottom: none;
-  }
-
-  .schedule-time {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--sky-light);
-    min-width: 52px;
-    padding-top: 2px;
-    flex-shrink: 0;
-  }
-
-  .schedule-desc {
-    font-size: 0.9rem;
-    flex: 1;
-  }
-
-  .schedule-desc strong {
-    color: var(--text);
-  }
-
-  .highlight-box {
-    background: linear-gradient(135deg, rgba(232,168,56,0.08), rgba(232,93,58,0.06));
-    border-left: 3px solid var(--gold);
-    padding: 12px 16px;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    margin: 1rem 0;
-    font-size: 0.9rem;
-  }
-
-  .warning-box {
-    background: rgba(232,93,58,0.06);
-    border-left: 3px solid var(--sunset);
-    padding: 12px 16px;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    margin: 1rem 0;
-    font-size: 0.9rem;
-  }
-
-  .tip-box {
-    background: rgba(58,143,183,0.06);
-    border-left: 3px solid var(--water);
-    padding: 12px 16px;
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    margin: 1rem 0;
-    font-size: 0.9rem;
   }
 
   .day-content h4 {
@@ -544,9 +471,6 @@
     font-weight: 600;
     margin: 1.25rem 0 0.5rem;
     color: var(--sky);
-    display: flex;
-    align-items: center;
-    gap: 6px;
   }
 
   .day-content p {
@@ -561,8 +485,7 @@
   }
 
   .day-content ul li {
-    padding: 4px 0;
-    padding-left: 20px;
+    padding: 4px 0 4px 20px;
     position: relative;
     font-size: 0.9rem;
     color: var(--text-muted);
@@ -576,7 +499,31 @@
     font-weight: 700;
   }
 
-  /* ─── HOTEL SECTION ─── */
+  .schedule { margin: 1rem 0; }
+
+  .schedule-item {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    align-items: flex-start;
+  }
+
+  .schedule-item:last-child { border-bottom: none; }
+
+  .schedule-time {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--sky-light);
+    min-width: 52px;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .schedule-desc { font-size: 0.9rem; flex: 1; }
+  .schedule-desc strong { color: var(--text); }
+
+  /* ─── HOTEL ─── */
   .hotel-card {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -585,29 +532,30 @@
     border: 1px solid var(--border);
   }
 
-  .hotel-banner {
+  .hotel-banner-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hotel-banner-text {
     background: linear-gradient(135deg, var(--forest) 0%, var(--forest-light) 100%);
-    padding: 2rem;
+    padding: 1.5rem 2rem;
     color: white;
   }
 
-  .hotel-banner h3 {
+  .hotel-banner-text h3 {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     margin-bottom: 0.25rem;
   }
 
-  .hotel-banner .stars-display {
-    color: var(--gold);
-    font-size: 1.1rem;
-    letter-spacing: 2px;
-  }
+  .hotel-banner-text h3 a { color: white; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.4); }
+  .hotel-banner-text h3 a:hover { text-decoration-color: white; }
 
-  .hotel-banner .location {
-    font-size: 0.9rem;
-    opacity: 0.85;
-    margin-top: 0.25rem;
-  }
+  .hotel-banner-text .stars-display { color: var(--gold); font-size: 1.1rem; letter-spacing: 2px; }
+  .hotel-banner-text .location { font-size: 0.9rem; opacity: 0.85; margin-top: 0.25rem; }
 
   .hotel-features {
     display: grid;
@@ -624,36 +572,16 @@
     gap: 12px;
   }
 
-  .hotel-feature .feat-icon {
-    font-size: 1.5rem;
-    line-height: 1;
-  }
-
-  .hotel-feature .feat-label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-weight: 500;
-  }
-
-  .hotel-feature .feat-value {
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin-top: 2px;
-  }
+  .hotel-feature .feat-icon { font-size: 1.5rem; line-height: 1; }
+  .hotel-feature .feat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
+  .hotel-feature .feat-value { font-weight: 600; font-size: 0.95rem; margin-top: 2px; }
 
   .hotel-included {
     padding: 20px;
     background: rgba(122,182,72,0.04);
   }
 
-  .hotel-included h4 {
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: var(--forest);
-  }
+  .hotel-included h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--forest); }
 
   .included-grid {
     display: grid;
@@ -669,11 +597,7 @@
     color: var(--text-muted);
   }
 
-  .included-item .check {
-    color: var(--meadow);
-    font-weight: 700;
-    font-size: 1rem;
-  }
+  .included-item .check { color: var(--meadow); font-weight: 700; font-size: 1rem; }
 
   /* ─── BUDGET ─── */
   .budget-grid {
@@ -683,9 +607,7 @@
     margin-bottom: 1.5rem;
   }
 
-  @media (max-width: 600px) {
-    .budget-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 600px) { .budget-grid { grid-template-columns: 1fr; } }
 
   .budget-card {
     background: var(--card-bg);
@@ -695,33 +617,10 @@
     border: 1px solid var(--border);
   }
 
-  .budget-card .b-label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    font-weight: 500;
-  }
-
-  .budget-card .b-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--sky);
-    margin-top: 4px;
-  }
-
-  .budget-card .b-note {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-top: 4px;
-  }
-
-  .budget-card.accent {
-    background: linear-gradient(135deg, var(--sky) 0%, var(--sky-light) 100%);
-    color: white;
-    border: none;
-  }
-
+  .budget-card .b-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; font-weight: 500; }
+  .budget-card .b-value { font-size: 1.5rem; font-weight: 700; color: var(--sky); margin-top: 4px; }
+  .budget-card .b-note { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; }
+  .budget-card.accent { background: linear-gradient(135deg, var(--sky), var(--sky-light)); color: white; border: none; }
   .budget-card.accent .b-label { color: rgba(255,255,255,0.7); }
   .budget-card.accent .b-value { color: white; }
   .budget-card.accent .b-note { color: rgba(255,255,255,0.7); }
@@ -744,22 +643,9 @@
   }
 
   .budget-row:last-child { border-bottom: none; }
-
-  .budget-row.total {
-    background: rgba(42,90,150,0.04);
-    font-weight: 700;
-    font-size: 1rem;
-  }
-
-  .budget-row .cat-icon {
-    margin-right: 8px;
-  }
-
-  .budget-row .amount {
-    font-family: 'JetBrains Mono', monospace;
-    font-weight: 600;
-    color: var(--sky);
-  }
+  .budget-row.total { background: rgba(42,90,150,0.04); font-weight: 700; font-size: 1rem; }
+  .budget-row .cat-icon { margin-right: 8px; }
+  .budget-row .amount { font-family: 'JetBrains Mono', monospace; font-weight: 600; color: var(--sky); white-space: nowrap; }
 
   .budget-bar {
     height: 8px;
@@ -767,14 +653,9 @@
     border-radius: 4px;
     margin: 1.5rem 0;
     overflow: hidden;
-    position: relative;
   }
 
-  .budget-bar-fill {
-    height: 100%;
-    border-radius: 4px;
-    transition: width 1s ease;
-  }
+  .budget-bar-fill { height: 100%; border-radius: 4px; }
 
   /* ─── LOGISTICS ─── */
   .route-visual {
@@ -786,57 +667,14 @@
     margin-bottom: 1.5rem;
   }
 
-  .route-stops {
-    position: relative;
-    padding-left: 30px;
-  }
+  .route-stops { position: relative; padding-left: 30px; }
+  .route-stops::before { content: ''; position: absolute; left: 10px; top: 12px; bottom: 12px; width: 2px; background: linear-gradient(to bottom, var(--sky), var(--meadow)); }
 
-  .route-stops::before {
-    content: '';
-    position: absolute;
-    left: 10px;
-    top: 12px;
-    bottom: 12px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--sky), var(--meadow));
-  }
-
-  .route-stop {
-    position: relative;
-    padding: 12px 0;
-  }
-
-  .route-stop::before {
-    content: '';
-    position: absolute;
-    left: -24px;
-    top: 18px;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--sky);
-    border: 2px solid white;
-    box-shadow: 0 0 0 2px var(--sky);
-  }
-
-  .route-stop.destination::before {
-    background: var(--meadow);
-    box-shadow: 0 0 0 2px var(--meadow);
-    width: 14px;
-    height: 14px;
-    left: -26px;
-    top: 16px;
-  }
-
-  .route-stop .stop-name {
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  .route-stop .stop-detail {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
+  .route-stop { position: relative; padding: 12px 0; }
+  .route-stop::before { content: ''; position: absolute; left: -24px; top: 18px; width: 10px; height: 10px; border-radius: 50%; background: var(--sky); border: 2px solid white; box-shadow: 0 0 0 2px var(--sky); }
+  .route-stop.destination::before { background: var(--meadow); box-shadow: 0 0 0 2px var(--meadow); width: 14px; height: 14px; left: -26px; top: 16px; }
+  .route-stop .stop-name { font-weight: 600; font-size: 0.95rem; }
+  .route-stop .stop-detail { font-size: 0.8rem; color: var(--text-muted); }
 
   .info-cards {
     display: grid;
@@ -852,49 +690,14 @@
     border: 1px solid var(--border);
   }
 
-  .info-card h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--sky);
-  }
-
-  .info-card ul {
-    list-style: none;
-    padding: 0;
-  }
-
-  .info-card ul li {
-    padding: 4px 0;
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    display: flex;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .info-card ul li .li-icon {
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
+  .info-card h4 { font-size: 0.95rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 8px; color: var(--sky); }
+  .info-card ul { list-style: none; padding: 0; }
+  .info-card ul li { padding: 4px 0; font-size: 0.85rem; color: var(--text-muted); display: flex; align-items: flex-start; gap: 6px; }
+  .info-card ul li .li-icon { flex-shrink: 0; margin-top: 2px; }
 
   /* ─── RESTAURANTS ─── */
-  .restaurant-group {
-    margin-bottom: 1.5rem;
-  }
-
-  .restaurant-group h4 {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--sky);
-    margin-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .restaurant-group { margin-bottom: 1.5rem; }
+  .restaurant-group h4 { font-size: 0.95rem; font-weight: 600; color: var(--sky); margin-bottom: 0.75rem; }
 
   .restaurant-cards {
     display: grid;
@@ -911,37 +714,11 @@
     transition: box-shadow 0.2s;
   }
 
-  .rest-card:hover {
-    box-shadow: var(--shadow);
-  }
-
-  .rest-card .rest-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 2px;
-  }
-
-  .rest-card .rest-style {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .rest-card .rest-price {
-    font-size: 0.8rem;
-    color: var(--forest-light);
-    font-weight: 500;
-    margin-top: 4px;
-  }
-
-  .rest-card .rest-kids {
-    display: inline-block;
-    font-size: 0.7rem;
-    background: rgba(122,182,72,0.1);
-    color: var(--forest-light);
-    padding: 2px 8px;
-    border-radius: 50px;
-    margin-top: 4px;
-  }
+  .rest-card:hover { box-shadow: var(--shadow); }
+  .rest-card .rest-name { font-weight: 600; font-size: 0.9rem; margin-bottom: 2px; }
+  .rest-card .rest-style { font-size: 0.8rem; color: var(--text-muted); }
+  .rest-card .rest-price { font-size: 0.8rem; color: var(--forest-light); font-weight: 500; margin-top: 4px; }
+  .rest-card .rest-kids { display: inline-block; font-size: 0.7rem; background: rgba(122,182,72,0.1); color: var(--forest-light); padding: 2px 8px; border-radius: 50px; margin-top: 4px; }
 
   /* ─── CHECKLIST ─── */
   .checklist-section {
@@ -963,41 +740,18 @@
     transition: background 0.2s;
     font-weight: 600;
     font-size: 0.95rem;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .checklist-header:hover {
-    background: rgba(0,0,0,0.02);
-  }
+  .checklist-header:hover { background: rgba(0,0,0,0.02); }
+  .checklist-header .cl-icon { font-size: 1.2rem; }
+  .checklist-header .cl-count { margin-left: auto; font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
 
-  .checklist-header .cl-icon {
-    font-size: 1.2rem;
-  }
+  .checklist-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .checklist-section.open .checklist-body { max-height: 2000px; }
+  .checklist-section.open .chevron { transform: rotate(180deg); }
 
-  .checklist-header .cl-count {
-    margin-left: auto;
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--text-muted);
-  }
-
-  .checklist-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.4s ease;
-  }
-
-  .checklist-section.open .checklist-body {
-    max-height: 2000px;
-  }
-
-  .checklist-section.open .chevron {
-    transform: rotate(180deg);
-  }
-
-  .checklist-items {
-    padding: 0 20px 16px;
-    border-top: 1px solid var(--border);
-  }
+  .checklist-items { padding: 0 20px 16px; border-top: 1px solid var(--border); }
 
   .checklist-item {
     display: flex;
@@ -1010,30 +764,10 @@
     user-select: none;
   }
 
-  .checklist-item input[type="checkbox"] {
-    margin-top: 3px;
-    width: 16px;
-    height: 16px;
-    accent-color: var(--meadow);
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-
-  .checklist-item.checked span {
-    text-decoration: line-through;
-    opacity: 0.5;
-  }
+  .checklist-item input[type="checkbox"] { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--meadow); cursor: pointer; flex-shrink: 0; }
+  .checklist-item.checked span { text-decoration: line-through; opacity: 0.5; }
 
   /* ─── WEATHER ─── */
-  .weather-card {
-    background: var(--card-bg);
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    margin-bottom: 1rem;
-  }
-
   .weather-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -1043,29 +777,16 @@
 
   .weather-stat {
     text-align: center;
-    padding: 12px;
-    background: rgba(42,90,150,0.04);
+    padding: 16px;
+    background: var(--card-bg);
     border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
   }
 
-  .weather-stat .ws-icon {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 4px;
-  }
-
-  .weather-stat .ws-value {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: var(--sky);
-  }
-
-  .weather-stat .ws-label {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
+  .weather-stat .ws-icon { font-size: 2rem; display: block; margin-bottom: 4px; }
+  .weather-stat .ws-value { font-size: 1.3rem; font-weight: 700; color: var(--sky); }
+  .weather-stat .ws-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
 
   .weather-pattern {
     display: grid;
@@ -1074,43 +795,13 @@
     margin: 1rem 0;
   }
 
-  .pattern-block {
-    padding: 10px 14px;
-    border-radius: var(--radius-sm);
-    font-size: 0.85rem;
-  }
-
-  .pattern-block.sun {
-    background: rgba(232,168,56,0.08);
-    border: 1px solid rgba(232,168,56,0.15);
-  }
-
-  .pattern-block.cloud {
-    background: rgba(139,134,128,0.08);
-    border: 1px solid rgba(139,134,128,0.15);
-  }
-
-  .pattern-block.storm {
-    background: rgba(58,143,183,0.08);
-    border: 1px solid rgba(58,143,183,0.15);
-  }
-
-  .pattern-block.clear {
-    background: rgba(232,93,58,0.06);
-    border: 1px solid rgba(232,93,58,0.12);
-  }
-
-  .pattern-block .pb-time {
-    font-weight: 600;
-    font-size: 0.8rem;
-    display: block;
-    margin-bottom: 2px;
-  }
-
-  .pattern-block .pb-desc {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
+  .pattern-block { padding: 10px 14px; border-radius: var(--radius-sm); font-size: 0.85rem; }
+  .pattern-block.sun { background: rgba(232,168,56,0.08); border: 1px solid rgba(232,168,56,0.15); }
+  .pattern-block.cloud { background: rgba(139,134,128,0.08); border: 1px solid rgba(139,134,128,0.15); }
+  .pattern-block.storm { background: rgba(58,143,183,0.08); border: 1px solid rgba(58,143,183,0.15); }
+  .pattern-block.clear { background: rgba(232,93,58,0.06); border: 1px solid rgba(232,93,58,0.12); }
+  .pattern-block .pb-time { font-weight: 600; font-size: 0.8rem; display: block; margin-bottom: 2px; }
+  .pattern-block .pb-desc { font-size: 0.78rem; color: var(--text-muted); }
 
   /* ─── EMERGENCY ─── */
   .sos-grid {
@@ -1129,26 +820,10 @@
     gap: 12px;
   }
 
-  .sos-card .sos-icon {
-    font-size: 1.5rem;
-  }
-
-  .sos-card .sos-label {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .sos-card .sos-number {
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--sunset);
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  .sos-card a {
-    color: var(--sunset);
-    text-decoration: none;
-  }
+  .sos-card .sos-icon { font-size: 1.5rem; }
+  .sos-card .sos-label { font-size: 0.8rem; color: var(--text-muted); }
+  .sos-card .sos-number { font-weight: 700; font-size: 1.1rem; color: var(--sunset); font-family: 'JetBrains Mono', monospace; }
+  .sos-card a { color: var(--sunset); text-decoration: none; }
 
   /* ─── LINKS ─── */
   .links-grid {
@@ -1170,32 +845,13 @@
     transition: box-shadow 0.2s, border-color 0.2s;
   }
 
-  .link-card:hover {
-    box-shadow: var(--shadow);
-    border-color: var(--sky-light);
-  }
+  .link-card:hover { box-shadow: var(--shadow); border-color: var(--sky-light); }
+  .link-card .link-icon { font-size: 1.4rem; }
+  .link-card .link-name { font-weight: 600; font-size: 0.9rem; }
+  .link-card .link-desc { font-size: 0.78rem; color: var(--text-muted); }
+  .link-card .arrow { margin-left: auto; color: var(--text-muted); font-size: 1.2rem; }
 
-  .link-card .link-icon {
-    font-size: 1.4rem;
-  }
-
-  .link-card .link-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-  }
-
-  .link-card .link-desc {
-    font-size: 0.78rem;
-    color: var(--text-muted);
-  }
-
-  .link-card .arrow {
-    margin-left: auto;
-    color: var(--text-muted);
-    font-size: 1.2rem;
-  }
-
-  /* ─── TODO SECTION ─── */
+  /* ─── TODO ─── */
   .todo-list {
     background: var(--card-bg);
     border-radius: var(--radius);
@@ -1216,8 +872,7 @@
   .todo-item:last-child { border-bottom: none; }
 
   .todo-item .todo-status {
-    width: 24px;
-    height: 24px;
+    width: 24px; height: 24px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -1226,25 +881,12 @@
     flex-shrink: 0;
   }
 
-  .todo-item .todo-status.done {
-    background: rgba(122,182,72,0.15);
-    color: var(--meadow);
-  }
+  .todo-item .todo-status.done { background: rgba(122,182,72,0.15); color: var(--meadow); }
+  .todo-item .todo-status.pending { background: rgba(232,168,56,0.15); color: var(--gold); }
+  .todo-item.done-item { opacity: 0.6; }
+  .todo-item.done-item .todo-text { text-decoration: line-through; }
 
-  .todo-item .todo-status.pending {
-    background: rgba(232,168,56,0.15);
-    color: var(--gold);
-  }
-
-  .todo-item.done-item {
-    opacity: 0.6;
-  }
-
-  .todo-item.done-item .todo-text {
-    text-decoration: line-through;
-  }
-
-  /* ─── BONUS ACTIVITIES TABLE ─── */
+  /* ─── BONUS TABLE ─── */
   .bonus-table {
     width: 100%;
     border-collapse: collapse;
@@ -1256,26 +898,9 @@
     font-size: 0.88rem;
   }
 
-  .bonus-table th {
-    background: rgba(42,90,150,0.06);
-    text-align: left;
-    padding: 10px 16px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    color: var(--sky);
-  }
-
-  .bonus-table td {
-    padding: 10px 16px;
-    border-top: 1px solid var(--border);
-    color: var(--text-muted);
-  }
-
-  .bonus-table tr:hover td {
-    background: rgba(0,0,0,0.015);
-  }
+  .bonus-table th { background: rgba(42,90,150,0.06); text-align: left; padding: 10px 16px; font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--sky); }
+  .bonus-table td { padding: 10px 16px; border-top: 1px solid var(--border); color: var(--text-muted); }
+  .bonus-table tr:hover td { background: rgba(0,0,0,0.015); }
 
   /* ─── FOOTER ─── */
   .footer {
@@ -1285,11 +910,7 @@
     font-size: 0.85rem;
   }
 
-  .footer .footer-emoji {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 0.5rem;
-  }
+  .footer .footer-emoji { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
 
   /* ─── MOBILE ─── */
   @media (max-width: 640px) {
@@ -1297,16 +918,19 @@
     .hero h1 { font-size: 2.2rem; }
     .hero-details { gap: 0.75rem; font-size: 0.85rem; }
     .hero-family { gap: 0.5rem; }
-    .family-member { min-width: 80px; padding: 10px 12px; }
-    .main { padding: 1.25rem 1rem 3rem; }
-    .section-header h2 { font-size: 1.3rem; }
+    .family-member { min-width: 75px; padding: 10px 12px; }
+    .tab-nav { padding: 8px; }
+    .tab-btn { padding: 8px 4px; font-size: 0.62rem; }
+    .tab-btn .tab-icon { font-size: 1.2rem; }
+    .tab-panel { padding: 0 1rem 3rem; }
+    .section-banner { margin: 0 -1rem; }
     .day-header { padding: 12px 14px; gap: 10px; }
     .day-num { width: 42px; height: 42px; font-size: 1rem; }
     .day-title { font-size: 0.95rem; }
     .day-content { padding: 0 14px 16px; }
     .schedule-item { flex-direction: column; gap: 2px; }
     .schedule-time { min-width: auto; }
-    .hotel-banner { padding: 1.5rem; }
+    .hotel-banner-text { padding: 1.25rem; }
     .hotel-features { grid-template-columns: 1fr 1fr; }
     .included-grid { grid-template-columns: 1fr; }
     .budget-card .b-value { font-size: 1.3rem; }
@@ -1316,14 +940,13 @@
     .sos-grid { grid-template-columns: 1fr; }
     .weather-grid { grid-template-columns: 1fr 1fr; }
     .weather-pattern { grid-template-columns: 1fr 1fr; }
-    .nav a { padding: 12px 12px; font-size: 0.8rem; }
     .bonus-table { font-size: 0.8rem; }
     .bonus-table th, .bonus-table td { padding: 8px 10px; }
   }
 
-  /* ─── PRINT ─── */
   @media print {
-    .nav, .scroll-hint { display: none; }
+    .tab-nav, .scroll-hint { display: none; }
+    .tab-panel { display: block !important; }
     .day-body { max-height: none !important; }
     .checklist-body { max-height: none !important; }
     .hero { min-height: auto; padding: 2rem; }
@@ -1333,26 +956,18 @@
 </head>
 <body>
 
-<!-- ═══════════ HERO ═══════════ -->
+<!-- ═══ HERO ═══ -->
 <section class="hero">
+  <div class="hero-bg"></div>
   <div class="stars" id="stars"></div>
-  <div class="mountains-bg">
-    <div class="mountain mountain-1"></div>
-    <div class="mountain mountain-2"></div>
-    <div class="mountain mountain-3"></div>
-    <div class="mountain mountain-snow"></div>
-  </div>
   <div class="hero-content">
     <div class="hero-badge">Confirmed &amp; Ready</div>
-    <h1>
-      Tatras 2026
-      <span>A Family Adventure in the Mountains</span>
-    </h1>
+    <h1>Mountains 2026<span>A Family Adventure in the High Tatras</span></h1>
     <div class="hero-details">
-      <div class="hero-detail"><span class="icon">📅</span> Aug 10 – 19</div>
-      <div class="hero-detail"><span class="icon">🌙</span> 9 nights</div>
-      <div class="hero-detail"><span class="icon">🏨</span> Hotel Hubert ★★★★</div>
-      <div class="hero-detail"><span class="icon">📍</span> Gerlachov, Slovakia</div>
+      <div class="hero-detail"><span>📅</span> Aug 10 – 19</div>
+      <div class="hero-detail"><span>🌙</span> 9 nights</div>
+      <div class="hero-detail"><span>🏨</span> Hotel Hubert ★★★★</div>
+      <div class="hero-detail"><span>📍</span> Gerlachov, Slovakia</div>
     </div>
     <div class="hero-family">
       <div class="family-member"><span class="emoji">🧔</span><span class="name">Pavel</span><span class="age">37</span></div>
@@ -1361,632 +976,522 @@
       <div class="family-member"><span class="emoji">👶</span><span class="name">Damian</span><span class="age">2.5</span></div>
     </div>
   </div>
-  <a class="scroll-hint" href="#nav" aria-label="Scroll down">
-    Explore the plan
-    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </a>
+  <a class="scroll-hint" href="#tabs" aria-label="Scroll down">Explore the plan<svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg></a>
 </section>
 
-<!-- ═══════════ NAV ═══════════ -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#itinerary"><span class="nav-icon">📋</span>Itinerary</a>
-    <a href="#hotel"><span class="nav-icon">🏨</span>Hotel</a>
-    <a href="#budget"><span class="nav-icon">💰</span>Budget</a>
-    <a href="#logistics"><span class="nav-icon">🚗</span>Getting There</a>
-    <a href="#restaurants"><span class="nav-icon">🍽</span>Restaurants</a>
-    <a href="#weather"><span class="nav-icon">⛅</span>Weather</a>
-    <a href="#packing"><span class="nav-icon">🎒</span>Packing</a>
-    <a href="#emergency"><span class="nav-icon">🆘</span>Emergency</a>
-    <a href="#todo"><span class="nav-icon">✅</span>To-Do</a>
-    <a href="#links"><span class="nav-icon">🔗</span>Links</a>
+<!-- ═══ TAB NAV ═══ -->
+<nav class="tab-nav" id="tabs">
+  <div class="tab-grid">
+    <button class="tab-btn active" onclick="switchTab('itinerary',this)"><span class="tab-icon">📋</span>Itinerary</button>
+    <button class="tab-btn" onclick="switchTab('hotel',this)"><span class="tab-icon">🏨</span>Hotel</button>
+    <button class="tab-btn" onclick="switchTab('budget',this)"><span class="tab-icon">💰</span>Budget</button>
+    <button class="tab-btn" onclick="switchTab('logistics',this)"><span class="tab-icon">🚗</span>Route</button>
+    <button class="tab-btn" onclick="switchTab('food',this)"><span class="tab-icon">🍽</span>Food</button>
+    <button class="tab-btn" onclick="switchTab('weather',this)"><span class="tab-icon">⛅</span>Weather</button>
+    <button class="tab-btn" onclick="switchTab('packing',this)"><span class="tab-icon">🎒</span>Packing</button>
+    <button class="tab-btn" onclick="switchTab('info',this)"><span class="tab-icon">🆘</span>Info</button>
   </div>
 </nav>
 
-<!-- ═══════════ MAIN ═══════════ -->
-<main class="main">
-
-<!-- ─── ITINERARY ─── -->
-<section class="section" id="itinerary">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(42,90,150,0.1)">📋</div>
-    <h2>Day-by-Day Itinerary<small>9 nights, 10 days of mountain magic</small></h2>
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: ITINERARY -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel active" id="tab-itinerary">
+  <div class="section-banner">
+    <img src="https://images.unsplash.com/photo-1676230879995-301613a2e1eb?w=1200&q=75&auto=format&fit=crop" alt="High Tatras panorama">
+    <div class="banner-text"><h2>Day-by-Day Itinerary<small>9 nights, 10 days of mountain magic</small></h2></div>
   </div>
 
-  <div class="tip-box" style="margin-bottom:1.5rem">
-    <strong>Flexible schedule!</strong> This isn't rigid — swap days based on weather and mood. Sunny morning → cable car / lake. Overcast → castle / museum. Rain → indoor fun at hotel.
-  </div>
+  <div class="content-section">
+    <div class="tip-box" style="margin-bottom:1.5rem"><strong>Flexible schedule!</strong> Swap days based on weather. ☀️ Clear → gondola / lake. 🌥️ Overcast → castle / museum. 🌧️ Rain → Tricklandia / hotel.</div>
 
-  <!-- Day 0 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--rock)"><small>Day</small>0</div>
-      <div class="day-info">
-        <div class="day-title">🚗 Arrival — Prague to Gerlachov</div>
-        <div class="day-subtitle">Mon Aug 10 · ~600 km, 8-9 hours with kids</div>
-        <div class="day-tags"><span class="tag">Road trip</span><span class="tag">Check-in</span></div>
+    <!-- Day 0 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--rock)"><small>Day</small>0</div>
+        <div class="day-info">
+          <div class="day-title">🚗 Arrival — Prague to Gerlachov</div>
+          <div class="day-subtitle">Mon Aug 10 · ~600 km, 8-9h with kids</div>
+          <div class="day-tags"><span class="tag">Road trip</span><span class="tag">Check-in</span></div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
+      <div class="day-body"><div class="day-content">
         <h4>🗺️ Route</h4>
         <div class="route-visual" style="margin:0.75rem 0">
           <div class="route-stops">
             <div class="route-stop"><span class="stop-name">Prague</span><span class="stop-detail">Depart 7:00 AM</span></div>
             <div class="route-stop"><span class="stop-name">Břeclav / D2</span><span class="stop-detail">~9:00 — McDonald's or OMV, snack, WC (20 min)</span></div>
             <div class="route-stop"><span class="stop-name">Trenčín</span><span class="stop-detail">~11:30 — Stretch legs, view the castle (30 min)</span></div>
-            <div class="route-stop"><span class="stop-name">Ružomberok</span><span class="stop-detail">~13:30 — Lunch stop (40 min)</span></div>
+            <div class="route-stop"><span class="stop-name">Ružomberok</span><span class="stop-detail">~13:30 — Lunch stop (40 min), Damian siesta starts</span></div>
             <div class="route-stop destination"><span class="stop-name">Hotel Hubert, Gerlachov</span><span class="stop-detail">~16:00–16:30 — Check-in!</span></div>
           </div>
         </div>
-        <h4>🕐 Evening at the Hotel</h4>
+        <h4>🕐 Evening</h4>
         <div class="schedule">
           <div class="schedule-item"><span class="schedule-time">16:30</span><span class="schedule-desc">Check-in, unpack, settle in</span></div>
           <div class="schedule-item"><span class="schedule-time">17:00</span><span class="schedule-desc">First walk — explore the grounds, kids to playground</span></div>
           <div class="schedule-item"><span class="schedule-time">18:00</span><span class="schedule-desc"><strong>Dinner</strong> (HB buffet)</span></div>
-          <div class="schedule-item"><span class="schedule-time">19:30</span><span class="schedule-desc">Gentle stroll, peek at the mini-zoo</span></div>
           <div class="schedule-item"><span class="schedule-time">21:00+</span><span class="schedule-desc">Kids sleep → terrace / bar for parents</span></div>
         </div>
-        <div class="tip-box">
-          <strong>Pro tips for the road:</strong> Tablet on only after Brno. Snacks in portions, not all at once. Favorite plush within arm's reach. Promise Elena ice cream on arrival!
-        </div>
-        <h4>📍 Navigation</h4>
-        <p><strong>Address:</strong> Hotel Hubert, Gerlachov 158, 059 42, Slovakia<br>
-        <strong>GPS:</strong> 49.1167°N, 20.2833°E — Follow signs from the Poprad–Tatranská Lomnica road to Gerlachov.</p>
-      </div>
+        <div class="tip-box"><strong>Tips:</strong> Tablet on after Brno only. Snacks in portions. Favourite plush within arm's reach. Promise Elena ice cream on arrival.</div>
+        <p><strong>Address:</strong> Hotel Hubert, Gerlachov 158, 059 42, Slovakia · <strong>GPS:</strong> 49.1167°N, 20.2833°E</p>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 1 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--forest-light)"><small>Day</small>1</div>
-      <div class="day-info">
-        <div class="day-title">🏨 Hotel Hubert — Acclimatization</div>
-        <div class="day-subtitle">Tue Aug 11 · No driving — full day at the resort</div>
-        <div class="day-tags"><span class="tag">Mini-zoo</span><span class="tag">Playground</span><span class="tag">Wellness</span><span class="tag highlight">Pony rides</span></div>
+    <!-- Day 1 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--forest-light)"><small>Day</small>1</div>
+        <div class="day-info">
+          <div class="day-title">🏨 Hotel Hubert — Acclimatization</div>
+          <div class="day-subtitle">Tue Aug 11 · No driving — full day at resort</div>
+          <div class="day-tags"><span class="tag">Mini-zoo</span><span class="tag">Playground</span><span class="tag">Wellness</span><span class="tag gold">Pony rides</span></div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>After a 9-hour drive, the kids need a car-free day. Hotel Hubert has more than enough to fill the whole day.</p>
-        <h4>📅 Schedule</h4>
+      <div class="day-body"><div class="day-content">
+        <p>After a 9-hour drive, kids need a car-free day. <a href="https://www.hotel-hubert.sk/sk" target="_blank">Hotel Hubert</a> has more than enough.</p>
         <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">7:30</span><span class="schedule-desc"><strong>Breakfast</strong> — buffet (Slovak + international)</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Mini-zoo Hubert</strong> — ponies, llamas, wallabies, peacocks, goats, rabbits ⭐</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Mini-zoo Hubert</strong> — ponies, llamas, wallabies, peacocks, goats, rabbits</span></div>
           <div class="schedule-item"><span class="schedule-time">11:00</span><span class="schedule-desc"><strong>Hubertíkovo mega playground</strong> — zipline, towers, slides, trampolines</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc">Lunch (hotel restaurant à la carte)</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc"><strong>Siesta</strong> — Damian sleeps, Elena quiet play / kids' cinema</span></div>
+          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc"><strong>Siesta</strong> — Damian sleeps, Elena kids' cinema</span></div>
           <div class="schedule-item"><span class="schedule-time">15:00</span><span class="schedule-desc"><strong>Pony ride</strong> (free for guests, supervised)</span></div>
-          <div class="schedule-item"><span class="schedule-time">16:00</span><span class="schedule-desc"><strong>Wellness</strong> — indoor pool 28°C, outdoor pool, jacuzzi 37°C</span></div>
-          <div class="schedule-item"><span class="schedule-time">18:00</span><span class="schedule-desc"><strong>Dinner</strong> (HB buffet)</span></div>
+          <div class="schedule-item"><span class="schedule-time">16:00</span><span class="schedule-desc"><strong>Wellness</strong> — indoor pool 28°C, outdoor pool, jacuzzi</span></div>
           <div class="schedule-item"><span class="schedule-time">21:00+</span><span class="schedule-desc">Parents: Japanese garden terrace / wellness / billiards</span></div>
         </div>
-        <h4>🐾 Mini-Zoo Animals</h4>
-        <p>Horses & ponies, llamas, wallabies, peacocks (roaming free!), goats & sheep (petting!), rabbits (Elena can hold them), turtles, royal python, bearded dragon, giant African snails, ducks & geese</p>
-        <div class="tip-box">Ask reception for animal feed (carrots, pellets). Perfect photo ops — Elena with a pony, Damian with a rabbit.</div>
-      </div>
+        <h4>🐾 Zoo Animals</h4>
+        <p>Horses & ponies, llamas, wallabies, peacocks (roaming free!), goats & sheep (petting!), rabbits (Elena can hold them), turtles, royal python, bearded dragon, giant African snails, ducks & geese.</p>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 2 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--water)"><small>Day</small>2</div>
-      <div class="day-info">
-        <div class="day-title">🚠 Skalnaté Pleso — Gondola to the Summit</div>
-        <div class="day-subtitle">Wed Aug 12 · 15 min drive · Gondola ride to 1751m</div>
-        <div class="day-tags"><span class="tag highlight">⭐ Must-do</span><span class="tag">Cable car</span><span class="tag">Mountain lake</span><span class="tag">TANAP Museum</span></div>
+    <!-- Day 2 -->
+    <div class="day-card">
+      <img class="day-card-photo" src="https://images.unsplash.com/photo-1641736047534-afd0c9014a7c?w=800&q=75&auto=format&fit=crop" alt="Cable car gondola">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--water)"><small>Day</small>2</div>
+        <div class="day-info">
+          <div class="day-title">🚠 Skalnaté Pleso — Gondola to the Summit</div>
+          <div class="day-subtitle">Wed Aug 12 · 15 min drive · Gondola to 1751m</div>
+          <div class="day-tags"><span class="tag gold">⭐ Must-do</span><span class="tag">Cable car</span><span class="tag">Mountain lake</span></div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>Ride a gondola (enclosed cabin — safe for Damian!) to a stunning alpine lake beneath Lomnický štít peak. Kids under 6 ride free.</p>
-        <h4>📅 Schedule</h4>
+      <div class="day-body"><div class="day-content">
+        <p>Ride an <strong>enclosed gondola</strong> (safe for Damian!) to a stunning alpine lake beneath Lomnický štít. Kids under 6 ride free.</p>
         <div class="schedule">
           <div class="schedule-item"><span class="schedule-time">7:00</span><span class="schedule-desc"><strong>Early breakfast</strong> — aim to be at the gondola by 8:00</span></div>
           <div class="schedule-item"><span class="schedule-time">8:00</span><span class="schedule-desc">Park at <strong>P+R Eurocamp</strong> (free!) — 10 min walk to gondola</span></div>
-          <div class="schedule-item"><span class="schedule-time">8:30</span><span class="schedule-desc"><strong>Gondola up</strong>: Tatranská Lomnica → Štart → Skalnaté Pleso</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-desc"><strong>At the top!</strong> Walk around the lake (~30 min loop), photos, spot chamois</span></div>
-          <div class="schedule-item"><span class="schedule-time">10:00</span><span class="schedule-desc">Snack / coffee at the lakeside restaurant</span></div>
-          <div class="schedule-item"><span class="schedule-time">11:00</span><span class="schedule-desc">Gondola back down</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc">Lunch in Tatranská Lomnica (Furkotka / Koliba Žerucha)</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Back to hotel → <strong>siesta</strong></span></div>
-          <div class="schedule-item"><span class="schedule-time">16:00</span><span class="schedule-desc"><strong>TANAP Museum</strong> — wildlife dioramas, interactive geology exhibits</span></div>
+          <div class="schedule-item"><span class="schedule-time">8:30</span><span class="schedule-desc"><strong>Gondola up</strong> (4-seat cabin → 15-seat gondola)</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-desc"><strong>At the top!</strong> Walk around lake, photos, spot chamois</span></div>
+          <div class="schedule-item"><span class="schedule-time">11:00</span><span class="schedule-desc">Gondola down → lunch in Lomnica</span></div>
+          <div class="schedule-item"><span class="schedule-time">16:00</span><span class="schedule-desc"><strong><a href="https://www.spravatanap.sk/web/index.php/en/museum-tanap" target="_blank">TANAP Museum</a></strong> — wildlife dioramas, interactive geology</span></div>
         </div>
-        <div class="warning-box">
-          <strong>Pack warm clothes!</strong> It's 10–14°C at the top even in August. Bring jackets, long pants, and rain gear for everyone. Leave the stroller — use a carrier for Damian.
-        </div>
-        <h4>🎟️ Tickets</h4>
-        <p><strong>Buy in advance</strong> via <a href="https://www.gopass.travel/" style="color:var(--water)">GOPASS</a> — dynamic pricing, cheaper when bought early. Adults ~25–40€ return. <strong>Kids under 6: FREE</strong> (both Elena and Damian!). Family total: ~50–80€.</p>
-        <div class="tip-box">If it's foggy/cloudy in the morning — skip this and swap with a castle day. No point paying for gondola if you can't see anything. Check the <a href="https://www.vt.sk/en/info/info/cableways-opening-hours" style="color:var(--water)">webcam</a> at 8 AM.</div>
-      </div>
+        <div class="warning-box"><strong>Pack warm!</strong> 10–14°C at the top even in August. Jackets + long pants mandatory. Leave stroller — carrier for Damian.</div>
+        <p>🎟️ <strong>Buy tickets early</strong> at <a href="https://www.gopass.travel/" target="_blank">gopass.travel</a> — dynamic pricing. Adults ~25–40€ return. <strong>Kids under 6: FREE.</strong> Family ~50–80€.</p>
+        <div class="tip-box">If foggy/cloudy → swap with a castle day. Check <a href="https://www.vt.sk/en/info/info/cableways-opening-hours" target="_blank">live webcam</a> at 8 AM.</div>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 3 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:#8b6914"><small>Day</small>3</div>
-      <div class="day-info">
-        <div class="day-title">🏰 Kežmarok Castle + UNESCO Church</div>
-        <div class="day-subtitle">Thu Aug 13 · 25 min drive · Easy half-day</div>
-        <div class="day-tags"><span class="tag">Castle</span><span class="tag highlight">UNESCO wooden church</span><span class="tag">Town square</span></div>
+    <!-- Day 3 -->
+    <div class="day-card">
+      <img class="day-card-photo" src="https://images.unsplash.com/photo-1745910256002-5b2615d19a54?w=800&q=75&auto=format&fit=crop" alt="Medieval castle on hilltop">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:#8b6914"><small>Day</small>3</div>
+        <div class="day-info">
+          <div class="day-title">🏰 Kežmarok Castle + UNESCO Church</div>
+          <div class="day-subtitle">Thu Aug 13 · 25 min drive · Easy half-day</div>
+          <div class="day-tags"><span class="tag">Castle</span><span class="tag gold">UNESCO wooden church</span></div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>The easiest castle trip — right in the town center, no climbing. Plus a unique all-wood church (UNESCO) built without a single nail.</p>
-        <h4>📅 Schedule</h4>
+      <div class="day-body"><div class="day-content">
+        <p>Easiest castle trip — right in town, no climbing. Plus a unique all-wood church (UNESCO, 1717) built without a single nail. <a href="https://www.kezmarok.com/" target="_blank">kezmarok.com</a></p>
         <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-desc">Drive to Kežmarok (25 min)</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:45</span><span class="schedule-desc"><strong>Castle tour</strong> — guided, ~80 min. Tower, armory, chapel with frescoes</span></div>
-          <div class="schedule-item"><span class="schedule-time">11:30</span><span class="schedule-desc"><strong>Wooden Articular Church</strong> (5 min walk) — 1717, all wood, no nails, UNESCO since 2008</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc">Town square walk + lunch + ice cream</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:45</span><span class="schedule-desc"><strong>Castle tour</strong> — guided ~80 min. Tower, armory, chapel with frescoes</span></div>
+          <div class="schedule-item"><span class="schedule-time">11:30</span><span class="schedule-desc"><strong>Wooden Articular Church</strong> (5 min walk) — all wood, no nails, stunning interior</span></div>
+          <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc">Town square + lunch + ice cream for kids</span></div>
           <div class="schedule-item"><span class="schedule-time">13:30</span><span class="schedule-desc">Back to hotel → siesta → playground / wellness</span></div>
         </div>
-        <h4>👨‍👩‍👧‍👦 Strategy with Kids</h4>
-        <p><strong>Option A:</strong> Everyone enters. If Damian gets restless → Katka takes him to the courtyard while Pavel + Elena finish the tower + armory.</p>
-        <p><strong>Option B:</strong> Pavel + Elena do the full tour. Katka + Damian explore the courtyard and nearby café.</p>
-        <div class="highlight-box">
-          <strong>Elena will love:</strong> The tower (stairs!), armory (swords & armor — "like a knight!"), and the church interior is a surprise — plain barn outside, stunning inside.
-        </div>
-        <p><strong>Entry:</strong> Adults 5€, child 3-6y 1€ → Family ~11€. <strong>Stroller OK</strong> in town (flat).</p>
-      </div>
+        <h4>👨‍👩‍👧‍👦 Strategy</h4>
+        <p>If Damian gets restless → Katka takes him to courtyard. Pavel + Elena finish the tower + armory ("like a knight!").</p>
+        <p><strong>Entry:</strong> Adults 5€, child 3-6y 1€ → Family ~11€. Stroller OK in town.</p>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 4 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--sunset)"><small>Day</small>4</div>
-      <div class="day-info">
-        <div class="day-title">🚂 Historic Train + Tricklandia + Tatrabob</div>
-        <div class="day-subtitle">Fri Aug 14 · Multi-stop fun day</div>
-        <div class="day-tags"><span class="tag highlight">⭐ Damian's fave</span><span class="tag">Trains</span><span class="tag">Optical illusions</span><span class="tag">Bobsled</span></div>
-      </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>A triple-feature day: historic mountain railway, a gallery of optical illusions, and a bobsled run for Elena. Damian's dream day (TRAINS!).</p>
-        <h4>📅 Schedule</h4>
-        <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">9:00</span><span class="schedule-desc">Drive to Tatranská Lomnica (P+R Eurocamp)</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:20</span><span class="schedule-desc"><strong>Tatra Electric Railway</strong> → Starý Smokovec (15 min ride)</span></div>
-          <div class="schedule-item"><span class="schedule-time">10:00</span><span class="schedule-desc"><strong>Tricklandia</strong> — optical illusions, trick-art, mirror maze (~60 min)</span></div>
-          <div class="schedule-item"><span class="schedule-time">11:15</span><span class="schedule-desc">Café in Smokovec (snack break)</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc">Train back to Lomnica → drive to hotel</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Lunch + <strong>siesta</strong></span></div>
-          <div class="schedule-item"><span class="schedule-time">15:45</span><span class="schedule-desc"><strong>Tatrabob</strong> — Elena (5) + one parent (3 rides). Damian in park with other parent.</span></div>
+    <!-- Day 4 -->
+    <div class="day-card">
+      <img class="day-card-photo" src="https://images.unsplash.com/photo-1764957080240-3a9a230c8718?w=800&q=75&auto=format&fit=crop" alt="Scenic mountain train">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--sunset)"><small>Day</small>4</div>
+        <div class="day-info">
+          <div class="day-title">🚂 Historic Train + Tricklandia + Tatrabob</div>
+          <div class="day-subtitle">Fri Aug 14 · Multi-stop fun day</div>
+          <div class="day-tags"><span class="tag gold">⭐ Damian's fave</span><span class="tag">Trains</span><span class="tag">Illusions</span><span class="tag">Bobsled</span></div>
         </div>
-        <h4>🚂 Tatra Electric Railway</h4>
-        <p>Narrow-gauge mountain railway since 1908. Look for the historic <strong>Kométa</strong> (1913) or <strong>Trojča</strong> (1969) wagons. Kids under 6 ride free. ~2€/adult each way.</p>
-        <h4>🎨 Tricklandia</h4>
-        <p>500m² of trick art, AR experiences, anti-gravity room, mirror maze. <strong>No strollers inside</strong> — carry Damian. Family entry ~37€. Book ahead at <a href="https://www.tricklandia.sk/" style="color:var(--water)">tricklandia.sk</a>.</p>
-        <h4>🎢 Tatrabob</h4>
-        <p>Alpine bobsled at Tatranská Lomnica. <strong>Kids under 5 cannot ride</strong> — Elena (5) + parent only. Damian waits with other parent. ~3-5€/ride. Parent controls speed.</p>
-        <div class="tip-box">Works in light rain (Tricklandia is indoor, train runs always). Tatrabob doesn't run in rain — do it another sunny afternoon instead.</div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
+      <div class="day-body"><div class="day-content">
+        <p>Triple-feature day: historic <a href="https://cp.sk/" target="_blank">Tatra Electric Railway</a>, optical illusion gallery, and a bobsled. Damian's dream (TRAINS!).</p>
+        <div class="schedule">
+          <div class="schedule-item"><span class="schedule-time">9:20</span><span class="schedule-desc"><strong>Tatra Electric Railway</strong> → Starý Smokovec (15 min ride). Look for historic Kométa (1913) or Trojča (1969)!</span></div>
+          <div class="schedule-item"><span class="schedule-time">10:00</span><span class="schedule-desc"><strong><a href="https://www.tricklandia.sk/" target="_blank">Tricklandia</a></strong> — 500m² of trick-art, AR, mirror maze, anti-gravity room (~60 min)</span></div>
+          <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc">Train back → hotel → lunch + siesta</span></div>
+          <div class="schedule-item"><span class="schedule-time">15:45</span><span class="schedule-desc"><strong><a href="https://www.tatrabob.sk/" target="_blank">Tatrabob</a></strong> — Elena (5) + parent (3 rides). Damian in park with other parent.</span></div>
+        </div>
+        <p>🚂 <strong>Train:</strong> Kids under 6 free. ~2€/adult each way. 🎨 <strong>Tricklandia:</strong> Family ~37€, no strollers. 🎢 <strong>Tatrabob:</strong> Kids under 5 cannot ride. ~3-5€/ride.</p>
+        <div class="tip-box">Works in light rain (Tricklandia is indoor, train runs always). Tatrabob doesn't run in rain — reschedule.</div>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 5 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--water-light)"><small>Day</small>5</div>
-      <div class="day-info">
-        <div class="day-title">🏞 Popradské Pleso — Stroller-Friendly Hike</div>
-        <div class="day-subtitle">Sat Aug 15 · 25 min drive + 4 km hike · Paved trail</div>
-        <div class="day-tags"><span class="tag highlight">⭐ Must-do</span><span class="tag">Glacial lake</span><span class="tag">Stroller OK</span><span class="tag">Mountain restaurant</span></div>
-      </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>One of the most beautiful and accessible mountain lakes. The entire 4 km trail is paved — perfect with a stroller. Restaurant right at the lake with stunning views.</p>
-        <h4>📅 Schedule</h4>
-        <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">7:00</span><span class="schedule-desc"><strong>Early breakfast</strong> (Saturday = more crowds, go early!)</span></div>
-          <div class="schedule-item"><span class="schedule-time">8:00</span><span class="schedule-desc">Drive to trailhead (paid parking ~5€, arrive before 9!)</span></div>
-          <div class="schedule-item"><span class="schedule-time">8:40</span><span class="schedule-desc"><strong>Start hiking</strong> — blue trail, paved path uphill</span></div>
-          <div class="schedule-item"><span class="schedule-time">10:00</span><span class="schedule-desc"><strong>Popradské Pleso!</strong> Photos, skipping stones, spot chamois</span></div>
-          <div class="schedule-item"><span class="schedule-time">11:30</span><span class="schedule-desc"><strong>Lunch</strong> at Chata Kapitána Morávku (halušky, grilled meat, hot cocoa)</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Hike down (~50 min, downhill = faster)</span></div>
-          <div class="schedule-item"><span class="schedule-time">14:00</span><span class="schedule-desc">Hotel → <strong>siesta</strong> → afternoon wellness / playground</span></div>
+    <!-- Day 5 -->
+    <div class="day-card">
+      <img class="day-card-photo" src="https://images.unsplash.com/photo-1678276747715-9d5b9d1c8ec3?w=800&q=75&auto=format&fit=crop" alt="Mountain lake in the Tatras">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--water-light)"><small>Day</small>5</div>
+        <div class="day-info">
+          <div class="day-title">🏞 Popradské Pleso — Stroller-Friendly Hike</div>
+          <div class="day-subtitle">Sat Aug 15 · 25 min drive + 4 km paved trail</div>
+          <div class="day-tags"><span class="tag gold">⭐ Must-do</span><span class="tag">Glacial lake</span><span class="tag">Stroller OK</span></div>
         </div>
-        <h4>📏 Trail Details</h4>
-        <p><strong>Distance:</strong> 4 km one way (8 km round trip) · <strong>Elevation:</strong> +300m (gradual) · <strong>Surface:</strong> Paved the entire way · <strong>Time up:</strong> 75-90 min with kids · <strong>Time down:</strong> 45-60 min</p>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="day-body"><div class="day-content">
+        <p>Beautiful glacial lake, 100% paved trail — perfect with stroller. Restaurant right at the lake.</p>
+        <div class="schedule">
+          <div class="schedule-item"><span class="schedule-time">7:00</span><span class="schedule-desc"><strong>Early breakfast</strong> (Saturday = go early!)</span></div>
+          <div class="schedule-item"><span class="schedule-time">8:40</span><span class="schedule-desc"><strong>Start hike</strong> — blue trail, paved, through forest</span></div>
+          <div class="schedule-item"><span class="schedule-time">10:00</span><span class="schedule-desc"><strong>Popradské Pleso!</strong> Photos, skipping stones, chamois-spotting</span></div>
+          <div class="schedule-item"><span class="schedule-time">11:30</span><span class="schedule-desc"><strong>Lunch at Chata Kapitána Morávku</strong> — halušky, grilled meat, hot cocoa</span></div>
+          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Hike down (~50 min) → hotel → siesta → wellness</span></div>
+        </div>
+        <p>📏 <strong>4 km one way</strong> (8 km total) · +300m elevation · Paved · Up: 75-90 min · Down: 45-60 min</p>
         <h4>👨‍👩‍👧‍👦 With Kids</h4>
         <ul>
-          <li><strong>Damian:</strong> In stroller the whole way. Let him walk on flat sections. Throwing pebbles into the lake = 30 min of fun</li>
-          <li><strong>Elena:</strong> Walks the whole way — motivate with "ice cream at the lake restaurant!" Count trees, collect pebbles, "who spots the lake first?"</li>
-          <li>One parent pushes stroller, the other walks with Elena. Swap halfway</li>
+          <li><strong>Damian:</strong> Stroller entire way. Throwing pebbles at lake = 30 min of fun</li>
+          <li><strong>Elena:</strong> Walks all 4 km — motivate with "ice cream at the restaurant!" Count trees, collect pebbles</li>
         </ul>
-        <div class="warning-box"><strong>Do NOT go if it's raining</strong> — the trail gets muddy and the lake in fog is pointless. Swap with a rest day or indoor activity.</div>
-      </div>
+        <div class="warning-box"><strong>Do NOT go if raining</strong> — trail gets muddy, lake in fog = pointless. Swap with rest day.</div>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 6 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--meadow)"><small>Day</small>6</div>
-      <div class="day-info">
-        <div class="day-title">🧘 Rest Day — Recharge at the Hotel</div>
-        <div class="day-subtitle">Sun Aug 16 · No car, no schedule, no stress</div>
-        <div class="day-tags"><span class="tag">Relax</span><span class="tag">Mini-zoo</span><span class="tag">Wellness</span><span class="tag">Swimming</span></div>
-      </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>After 5 active days, everyone needs a reset. Sunday = packed attractions anyway, better to stay at the hotel. Zero stress. Do what you want, when you want.</p>
-        <h4>🎯 Activity Menu (pick whatever you feel like)</h4>
-        <ul>
-          <li>🐎 <strong>Mini-zoo</strong> — feed animals, pony ride (kids always want to go back)</li>
-          <li>🏊 <strong>Swimming</strong> — indoor pool, outdoor pool, jacuzzi</li>
-          <li>🧖 <strong>Wellness</strong> — saunas (parents, taking turns)</li>
-          <li>🎪 <strong>Animation program</strong> — crafts, games (check weekly schedule)</li>
-          <li>🎬 <strong>Kids' cinema</strong> — cartoons at the hotel</li>
-          <li>🎯 <strong>Billiards, darts, table tennis</strong></li>
-          <li>🚴 <strong>Bikes / scooters</strong> — hotel lends them, ride on flat roads</li>
-          <li>🌿 <strong>Walk around Gerlachov</strong> — meadows, stream, cows, wildflowers</li>
-          <li>📖 <strong>Read on the terrace</strong> while kids play</li>
-        </ul>
-        <div class="highlight-box">
-          <strong>Why rest matters:</strong> Damian (2.5) gets overstimulated after too many new experiences. Elena needs routine. Tired kids = meltdowns. A rest day now = smooth sailing for the rest of the trip.
+    <!-- Day 6 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--meadow)"><small>Day</small>6</div>
+        <div class="day-info">
+          <div class="day-title">🧘 Rest Day — Recharge at the Hotel</div>
+          <div class="day-subtitle">Sun Aug 16 · No car, no schedule, no stress</div>
+          <div class="day-tags"><span class="tag">Relax</span><span class="tag">Wellness</span><span class="tag">Swimming</span></div>
         </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
+      <div class="day-body"><div class="day-content">
+        <p>After 5 active days, everyone needs a reset. Sunday = packed attractions, better to stay at hotel.</p>
+        <h4>🎯 Activity Menu</h4>
+        <ul>
+          <li>🐎 <strong>Mini-zoo</strong> — feed animals, pony ride</li>
+          <li>🏊 <strong>Swimming</strong> — indoor + outdoor pool, jacuzzi</li>
+          <li>🧖 <strong>Wellness</strong> — saunas (parents, take turns)</li>
+          <li>🎪 <strong>Animation program</strong> — crafts, games</li>
+          <li>🎯 Billiards, darts, table tennis</li>
+          <li>🚴 Bikes / scooters — hotel lends them</li>
+          <li>🌿 Walk around Gerlachov — meadows, stream, flowers</li>
+        </ul>
+        <div class="highlight-box"><strong>Why rest matters:</strong> Damian gets overstimulated. Elena needs routine. Tired kids = meltdowns. Rest now = smooth sailing for the rest.</div>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 7 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:#7a5c2e"><small>Day</small>7</div>
-      <div class="day-info">
-        <div class="day-title">🏛 Open-Air Museum Pribylina + Liptov</div>
-        <div class="day-subtitle">Mon Aug 17 · 50 min drive · Full-day trip</div>
-        <div class="day-tags"><span class="tag highlight">⭐ Must-do</span><span class="tag">Open-air museum</span><span class="tag">Live crafts</span><span class="tag">Horse rides</span><span class="tag">Historic train</span></div>
+    <!-- Day 7 -->
+    <div class="day-card">
+      <img class="day-card-photo" src="https://images.unsplash.com/photo-1726164856940-648c34ad0a57?w=800&q=75&auto=format&fit=crop" alt="Historic wooden cabin in open-air museum">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:#7a5c2e"><small>Day</small>7</div>
+        <div class="day-info">
+          <div class="day-title">🏛 Open-Air Museum Pribylina + Liptov</div>
+          <div class="day-subtitle">Mon Aug 17 · 50 min drive · Full-day trip</div>
+          <div class="day-tags"><span class="tag gold">⭐ Must-do</span><span class="tag">Museum</span><span class="tag">Live crafts</span><span class="tag">Horse rides</span></div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>The biggest open-air museum under the Tatras. 30+ historic buildings, live craftsmen, Hucul horses, a miniature train through the grounds. Incredibly cheap entry.</p>
-        <h4>📅 Schedule</h4>
+      <div class="day-body"><div class="day-content">
+        <p>Biggest open-air museum under the Tatras. 30+ historic buildings, live craftsmen, Hucul horses, miniature train. <a href="https://www.skanzenpribylina.sk/en/homepage" target="_blank">skanzenpribylina.sk</a></p>
         <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">8:30</span><span class="schedule-desc">Drive to Pribylina (~50 min)</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Enter museum</strong> — guided tour: Gothic church + Renaissance manor (~45 min)</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Guided tour:</strong> Gothic church + Renaissance manor (~45 min)</span></div>
           <div class="schedule-item"><span class="schedule-time">10:15</span><span class="schedule-desc"><strong>Free exploration</strong> — houses, blacksmith, potter, weaver, animals</span></div>
-          <div class="schedule-item"><span class="schedule-time">11:30</span><span class="schedule-desc"><strong>Historic train ride</strong> around the grounds (Damian = ecstatic)</span></div>
+          <div class="schedule-item"><span class="schedule-time">11:30</span><span class="schedule-desc"><strong>Train ride</strong> through the grounds (Damian = ecstatic!)</span></div>
           <div class="schedule-item"><span class="schedule-time">12:00</span><span class="schedule-desc"><strong>Hucul horse ride</strong> for Elena</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Drive to Liptovský Mikuláš for lunch</span></div>
-          <div class="schedule-item"><span class="schedule-time">14:00</span><span class="schedule-desc"><strong>Afternoon option:</strong> Vlkolínec UNESCO village OR Bricklandia OR head home</span></div>
-          <div class="schedule-item"><span class="schedule-time">16:30</span><span class="schedule-desc">Back at hotel</span></div>
+          <div class="schedule-item"><span class="schedule-time">13:00</span><span class="schedule-desc">Lunch in Liptovský Mikuláš</span></div>
+          <div class="schedule-item"><span class="schedule-time">14:00</span><span class="schedule-desc"><strong>Option:</strong> <a href="https://www.vlkolinec.sk/" target="_blank">Vlkolínec UNESCO</a> village, <a href="https://bricklandia.sk/" target="_blank">Bricklandia</a>, or head home</span></div>
         </div>
-        <h4>💡 What the Kids Will Love</h4>
-        <ul>
-          <li><strong>Elena (5):</strong> Try the potter's wheel! Watch the blacksmith forge iron. Horse ride. Play "student" in the old school</li>
-          <li><strong>Damian (2.5):</strong> The train. The animals (sheep, goats). Running in and out of tiny houses. The fire at the smithy</li>
-        </ul>
-        <p><strong>Entry:</strong> Adults 3€, kids 3-6y ~0.01€ (symbolic) → Family total ~7.50€</p>
-        <h4>🔀 Afternoon Options</h4>
-        <p><strong>A) Vlkolínec (UNESCO)</strong> — Living 19th-century wooden village (45 inhabitants!). Adventure game for kids 3-10. Free entry, 30 min from Pribylina. Steep walk up.<br>
-        <strong>B) Bricklandia</strong> — LEGO exhibition, DUPLO pool (60 kg of bricks!). If it's in Liptov that month. 18€ family.<br>
-        <strong>C) Just go home</strong> — If kids are tired, head back. No pressure.</p>
-      </div>
+        <p><strong>Entry:</strong> Adults 3€, kids 3-6y ~0.01€ → Family ~7.50€. Stroller-friendly. Free parking.</p>
+      </div></div>
     </div>
-  </div>
 
-  <!-- Day 8 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--sky)"><small>Day</small>8</div>
-      <div class="day-info">
-        <div class="day-title">🏰 Stará Ľubovňa — The Grand Castle</div>
-        <div class="day-subtitle">Tue Aug 18 · 45 min drive · Last big trip</div>
-        <div class="day-tags"><span class="tag highlight">⭐ Must-do</span><span class="tag">Castle</span><span class="tag">Open-air museum</span><span class="tag">Panoramic views</span></div>
-      </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <p>The most impressive castle of the trip. Limestone fortress on a hilltop with panoramic Tatra views, plus an open-air museum with 25 buildings below.</p>
-        <h4>📅 Schedule</h4>
-        <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">8:30</span><span class="schedule-desc">Drive to Stará Ľubovňa (~45 min)</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Split up:</strong></span></div>
-          <div class="schedule-item"><span class="schedule-time"></span><span class="schedule-desc">→ Pavel + Elena: <strong>Castle tour</strong> (guided, 90 min — tower, armory, torture chamber, chapel)</span></div>
-          <div class="schedule-item"><span class="schedule-time"></span><span class="schedule-desc">→ Katka + Damian: <strong>Open-air museum</strong> (flat terrain, animals, benches, stroller-friendly)</span></div>
-          <div class="schedule-item"><span class="schedule-time">11:00</span><span class="schedule-desc"><strong>Meet in the museum</strong> — explore together</span></div>
-          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Lunch in town or on the way back</span></div>
-          <div class="schedule-item"><span class="schedule-time">14:15</span><span class="schedule-desc">Siesta → afternoon at hotel (last day!)</span></div>
-          <div class="schedule-item"><span class="schedule-time">18:00</span><span class="schedule-desc"><strong>Last dinner</strong> at the hotel</span></div>
-          <div class="schedule-item"><span class="schedule-time">20:00</span><span class="schedule-desc">Start packing (do most of it tonight)</span></div>
+    <!-- Day 8 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--sky)"><small>Day</small>8</div>
+        <div class="day-info">
+          <div class="day-title">🏰 Stará Ľubovňa — The Grand Castle</div>
+          <div class="day-subtitle">Tue Aug 18 · 45 min drive · Last big trip</div>
+          <div class="day-tags"><span class="tag gold">⭐ Must-do</span><span class="tag">Castle</span><span class="tag">Panoramic views</span></div>
         </div>
-        <h4>🏰 Castle Highlights</h4>
-        <ul>
-          <li>Gothic chapel with frescoes</li>
-          <li>Knight's hall with weapons and armor</li>
-          <li>Torture chamber (Elena: scary but fascinating)</li>
-          <li><strong>Lookout tower</strong> — panoramic views of the Tatras, Pieniny, and Spiš</li>
-          <li>Crown jewel replicas (Polish coronation regalia)</li>
-          <li>46-meter deep castle well</li>
-        </ul>
-        <p><strong>Family combo ticket:</strong> Castle + museum = 24€ + Damian 2€ = ~26€. Photography free!</p>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
-    </div>
-  </div>
-
-  <!-- Day 9 -->
-  <div class="day-card">
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-num" style="background:var(--rock)"><small>Day</small>9</div>
-      <div class="day-info">
-        <div class="day-title">🚗 Departure — Gerlachov to Prague</div>
-        <div class="day-subtitle">Wed Aug 19 · ~600 km, 8-9 hours</div>
-        <div class="day-tags"><span class="tag">Road trip home</span><span class="tag">Last breakfast</span></div>
-      </div>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="day-body">
-      <div class="day-content">
-        <h4>📅 Schedule</h4>
+      <div class="day-body"><div class="day-content">
+        <p>Most impressive castle of the trip. Hilltop fortress with panoramic Tatra views + 25-building open-air museum below. <a href="https://www.hradlubovna.sk/" target="_blank">hradlubovna.sk</a></p>
+        <h4>👨‍👩‍👧‍👦 Split Strategy</h4>
         <div class="schedule">
-          <div class="schedule-item"><span class="schedule-time">7:00</span><span class="schedule-desc"><strong>Last breakfast</strong> — take your time, enjoy it</span></div>
-          <div class="schedule-item"><span class="schedule-time">8:30</span><span class="schedule-desc">Finish packing, check-out, load the car</span></div>
-          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Say goodbye to the ponies</strong> 🐎 (one last mini-zoo visit)</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Pavel + Elena → Castle</strong> (guided, 90 min — tower, armory, torture chamber, chapel, 46m well)</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Katka + Damian → Open-air museum</strong> (flat, stroller OK, animals, benches)</span></div>
+          <div class="schedule-item"><span class="schedule-time">11:00</span><span class="schedule-desc"><strong>Meet</strong> in museum — explore together</span></div>
+          <div class="schedule-item"><span class="schedule-time">12:30</span><span class="schedule-desc">Lunch → drive back → siesta</span></div>
+          <div class="schedule-item"><span class="schedule-time">18:00</span><span class="schedule-desc"><strong>Last dinner</strong> at hotel. Start packing after.</span></div>
+        </div>
+        <p><strong>Family combo:</strong> Castle + museum = 24€ + Damian 2€ = ~26€. Photography free!</p>
+      </div></div>
+    </div>
+
+    <!-- Day 9 -->
+    <div class="day-card">
+      <div class="day-header" onclick="toggleDay(this)">
+        <div class="day-num" style="background:var(--rock)"><small>Day</small>9</div>
+        <div class="day-info">
+          <div class="day-title">🚗 Departure — Gerlachov to Prague</div>
+          <div class="day-subtitle">Wed Aug 19 · ~600 km, 8-9h</div>
+          <div class="day-tags"><span class="tag">Home</span></div>
+        </div>
+        <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div class="day-body"><div class="day-content">
+        <div class="schedule">
+          <div class="schedule-item"><span class="schedule-time">7:00</span><span class="schedule-desc"><strong>Last breakfast</strong> — take your time</span></div>
+          <div class="schedule-item"><span class="schedule-time">9:30</span><span class="schedule-desc"><strong>Say goodbye to the ponies</strong> 🐎</span></div>
           <div class="schedule-item"><span class="schedule-time">10:15</span><span class="schedule-desc"><strong>Depart</strong></span></div>
-          <div class="schedule-item"><span class="schedule-time">12:15</span><span class="schedule-desc">Lunch stop — Ružomberok / Žilina (maybe quick Vlkolínec detour?)</span></div>
-          <div class="schedule-item"><span class="schedule-time">14:30</span><span class="schedule-desc">Trenčín — quick stop (Damian napping in car by now)</span></div>
-          <div class="schedule-item"><span class="schedule-time">17:00</span><span class="schedule-desc">Brno area — last WC stop</span></div>
+          <div class="schedule-item"><span class="schedule-time">12:15</span><span class="schedule-desc">Lunch — Ružomberok / Žilina (maybe quick <a href="https://www.vlkolinec.sk/" target="_blank">Vlkolínec</a> detour?)</span></div>
           <div class="schedule-item"><span class="schedule-time">18:30</span><span class="schedule-desc"><strong>Home! Prague</strong></span></div>
         </div>
-        <div class="tip-box">
-          <strong>Prep the night before:</strong> Pack most things after dinner. Refuel the car Tuesday evening. In the morning, just grab toiletries, chargers, plushies, and swimsuits drying overnight. Take fruit/bread from breakfast buffet for the road.
+        <div class="tip-box"><strong>Night before:</strong> Pack most things after dinner. Refuel car. Morning: just grab toiletries, chargers, plushies. Grab fruit from breakfast for the road.</div>
+      </div></div>
+    </div>
+
+    <!-- Bonus -->
+    <h3 style="margin:2rem 0 1rem; font-family:'Playfair Display',serif; color:var(--sky)">🎁 Bonus Activities</h3>
+    <div style="overflow-x:auto">
+    <table class="bonus-table">
+      <thead><tr><th>Activity</th><th>Drive</th><th>Time</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Štrbské Pleso</strong> loop</td><td>25 min</td><td>2-3h</td><td>Alternative to Popradské Pleso</td></tr>
+        <tr><td><strong><a href="https://www.spisskyhrad.sk/" target="_blank">Spišský Castle</a></strong> (UNESCO)</td><td>50 min</td><td>Half day</td><td>Instead of Stará Ľubovňa</td></tr>
+        <tr><td><strong><a href="https://www.vlkolinec.sk/" target="_blank">Vlkolínec</a></strong> (UNESCO)</td><td>75 min</td><td>2-3h</td><td>Add to Liptov day</td></tr>
+        <tr><td><strong>Chopok Gondola</strong> (<a href="https://www.jasna.sk/" target="_blank">Jasná</a>)</td><td>75 min</td><td>Half day</td><td>Add to Liptov day</td></tr>
+        <tr><td><strong>Belianska Cave</strong></td><td>25 min</td><td>2h</td><td>Pavel + Elena only (age 4+)</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: HOTEL -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-hotel">
+  <div class="section-banner">
+    <img src="https://images.unsplash.com/photo-1550435443-33e0d1e69b3e?w=1200&q=75&auto=format&fit=crop&crop=bottom" alt="Mountain resort">
+    <div class="banner-text"><h2>Our Hotel<small>Home base for 9 nights</small></h2></div>
+  </div>
+
+  <div class="content-section">
+    <div class="hotel-card">
+      <div class="hotel-banner-text">
+        <h3><a href="https://www.hotel-hubert.sk/sk" target="_blank">Hotel Hubert Vital Resort</a></h3>
+        <div class="stars-display">★★★★</div>
+        <div class="location">📍 Gerlachov 158 · 15 min from Tatranská Lomnica · 📞 <a href="tel:+421524181108" style="color:rgba(255,255,255,0.8)">+421 52 418 11 08</a></div>
+      </div>
+      <div class="hotel-features">
+        <div class="hotel-feature"><span class="feat-icon">📅</span><div><span class="feat-label">Stay</span><div class="feat-value">Aug 10–19 (9 nights)</div></div></div>
+        <div class="hotel-feature"><span class="feat-icon">🍽</span><div><span class="feat-label">Meals</span><div class="feat-value">Half-board (breakfast + dinner)</div></div></div>
+        <div class="hotel-feature"><span class="feat-icon">🛏</span><div><span class="feat-label">Room</span><div class="feat-value">Family room (2A + 2 kids)</div></div></div>
+        <div class="hotel-feature"><span class="feat-icon">💰</span><div><span class="feat-label">Cost</span><div class="feat-value">51,000 CZK confirmed</div></div></div>
+        <div class="hotel-feature"><span class="feat-icon">🥣</span><div><span class="feat-label">Breakfast</span><div class="feat-value">7:00 – 10:00 (buffet)</div></div></div>
+        <div class="hotel-feature"><span class="feat-icon">🍷</span><div><span class="feat-label">Dinner</span><div class="feat-value">18:00 – 21:00 (buffet)</div></div></div>
+      </div>
+      <div class="hotel-included">
+        <h4>✅ Included for Guests (Free)</h4>
+        <div class="included-grid">
+          <div class="included-item"><span class="check">✓</span> Mini-zoo Hubert (all day)</div>
+          <div class="included-item"><span class="check">✓</span> Hubertíkovo mega playground</div>
+          <div class="included-item"><span class="check">✓</span> Pony & horse rides</div>
+          <div class="included-item"><span class="check">✓</span> Indoor pool (28-30°C)</div>
+          <div class="included-item"><span class="check">✓</span> Outdoor pool (seasonal)</div>
+          <div class="included-item"><span class="check">✓</span> Saunas & wellness</div>
+          <div class="included-item"><span class="check">✓</span> Animation program</div>
+          <div class="included-item"><span class="check">✓</span> Kids' cinema</div>
+          <div class="included-item"><span class="check">✓</span> Billiards, darts, table tennis</div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Bonus Activities -->
-  <h3 style="margin:2rem 0 1rem; font-family:'Playfair Display',serif; color:var(--sky)">🎁 Bonus Activities (if energy permits)</h3>
-  <div style="overflow-x:auto">
-  <table class="bonus-table">
-    <thead>
-      <tr><th>Activity</th><th>From Hotel</th><th>Duration</th><th>When</th></tr>
-    </thead>
-    <tbody>
-      <tr><td><strong>Štrbské Pleso</strong> loop</td><td>25 min</td><td>2-3 h</td><td>Instead of or after Popradské Pleso</td></tr>
-      <tr><td><strong>Spišský Castle</strong> (UNESCO)</td><td>50 min</td><td>Half day</td><td>Instead of Stará Ľubovňa</td></tr>
-      <tr><td><strong>Bielé / Zelené Pleso</strong></td><td>15 min + 5 km walk</td><td>Half day</td><td>If you want a tougher hike</td></tr>
-      <tr><td><strong>Strachankovo</strong> (Ždiar zoo)</td><td>40 min</td><td>2 h</td><td>Afternoon of a rest day</td></tr>
-      <tr><td><strong>Chopok Gondola</strong> (Jasná)</td><td>75 min</td><td>Half day</td><td>Add to Liptov trip</td></tr>
-      <tr><td><strong>Vlkolínec</strong> (UNESCO)</td><td>75 min</td><td>2-3 h</td><td>Add to Liptov trip</td></tr>
-      <tr><td><strong>Belianska Cave</strong></td><td>25 min</td><td>2 h</td><td>Pavel + Elena only (age 4+)</td></tr>
-    </tbody>
-  </table>
-  </div>
-</section>
-
-<!-- ─── HOTEL ─── -->
-<section class="section" id="hotel">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(45,80,22,0.1)">🏨</div>
-    <h2>Our Hotel<small>Home base for 9 nights</small></h2>
-  </div>
-
-  <div class="hotel-card">
-    <div class="hotel-banner">
-      <h3>Hotel Hubert Vital Resort</h3>
-      <div class="stars-display">★★★★</div>
-      <div class="location">📍 Gerlachov 158 · 15 min from Tatranská Lomnica · <a href="https://www.hotel-hubert.sk/sk" style="color:rgba(255,255,255,0.8)">hotel-hubert.sk</a></div>
+    <div class="highlight-box" style="margin-top:1rem">
+      <strong>Evening vibe:</strong> Hotel Hubert is a "slow-down" resort — quiet bar, beautiful Japanese garden terrace. Perfect for wine + conversation after kids sleep. Not a party hotel — that's a feature, not a bug, with a 2-year-old.
     </div>
-    <div class="hotel-features">
-      <div class="hotel-feature"><span class="feat-icon">📅</span><div><span class="feat-label">Stay</span><div class="feat-value">Aug 10–19 (9 nights)</div></div></div>
-      <div class="hotel-feature"><span class="feat-icon">🍽</span><div><span class="feat-label">Meals</span><div class="feat-value">Half-board (breakfast + dinner)</div></div></div>
-      <div class="hotel-feature"><span class="feat-icon">🛏</span><div><span class="feat-label">Room</span><div class="feat-value">Family room (2A + 2 kids)</div></div></div>
-      <div class="hotel-feature"><span class="feat-icon">📞</span><div><span class="feat-label">Reservations</span><div class="feat-value">+421 52 418 11 08</div></div></div>
-      <div class="hotel-feature"><span class="feat-icon">🥣</span><div><span class="feat-label">Breakfast</span><div class="feat-value">7:00 – 10:00 (buffet)</div></div></div>
-      <div class="hotel-feature"><span class="feat-icon">🍷</span><div><span class="feat-label">Dinner</span><div class="feat-value">18:00 – 21:00 (buffet)</div></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: BUDGET -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-budget">
+  <div class="section-banner" style="background:linear-gradient(135deg,var(--sky),var(--sky-light))">
+    <div class="banner-text"><h2>💰 Budget<small>Total 85,000 CZK (~3,400€) · Comfortable margin</small></h2></div>
+  </div>
+
+  <div class="content-section">
+    <div class="budget-grid">
+      <div class="budget-card accent">
+        <div class="b-label">Total Budget</div>
+        <div class="b-value">85,000 CZK</div>
+        <div class="b-note">~3,400€ for 4 people, 9 nights</div>
+      </div>
+      <div class="budget-card">
+        <div class="b-label">Estimated Spend</div>
+        <div class="b-value">73,500 – 77,500</div>
+        <div class="b-note">~7,500 – 11,500 CZK reserve</div>
+      </div>
     </div>
-    <div class="hotel-included">
-      <h4>✅ Included for Guests (Free)</h4>
-      <div class="included-grid">
-        <div class="included-item"><span class="check">✓</span> Mini-zoo Hubert (all day)</div>
-        <div class="included-item"><span class="check">✓</span> Hubertíkovo mega playground</div>
-        <div class="included-item"><span class="check">✓</span> Pony & horse rides</div>
-        <div class="included-item"><span class="check">✓</span> Indoor pool (28-30°C)</div>
-        <div class="included-item"><span class="check">✓</span> Outdoor pool (seasonal)</div>
-        <div class="included-item"><span class="check">✓</span> Saunas & wellness</div>
-        <div class="included-item"><span class="check">✓</span> Animation program</div>
-        <div class="included-item"><span class="check">✓</span> Kids' cinema</div>
-        <div class="included-item"><span class="check">✓</span> Billiards, darts, table tennis</div>
+
+    <div class="budget-bar">
+      <div class="budget-bar-fill" style="width:91%;background:linear-gradient(90deg,var(--sky) 0%,var(--water) 66%,var(--meadow) 100%)"></div>
+    </div>
+
+    <div class="budget-breakdown">
+      <div class="budget-row"><span><span class="cat-icon">🏨</span>Accommodation (HB, 9 nights)</span><span class="amount">51,000</span></div>
+      <div class="budget-row"><span><span class="cat-icon">🍽</span>Lunches at restaurants</span><span class="amount">5,000 – 6,500</span></div>
+      <div class="budget-row"><span><span class="cat-icon">🎟</span>Activities & attractions</span><span class="amount">5,500 – 7,000</span></div>
+      <div class="budget-row"><span><span class="cat-icon">⛽</span>Fuel (~1,710 km total)</span><span class="amount">3,000 – 3,500</span></div>
+      <div class="budget-row"><span><span class="cat-icon">🍦</span>Snacks, drinks, ice cream</span><span class="amount">2,500 – 3,500</span></div>
+      <div class="budget-row"><span><span class="cat-icon">🅿️</span>Parking</span><span class="amount">800 – 1,200</span></div>
+      <div class="budget-row"><span><span class="cat-icon">🛣</span>Highway vignettes (<a href="https://edalnice.cz/en/" target="_blank">CZ</a> + <a href="https://eznamka.sk/en/" target="_blank">SK</a>)</span><span class="amount">725</span></div>
+      <div class="budget-row"><span><span class="cat-icon">🛟</span>Reserve (unexpected)</span><span class="amount">5,000</span></div>
+      <div class="budget-row total"><span>Estimated Total</span><span class="amount">~73,500 – 77,500</span></div>
+    </div>
+
+    <div class="tip-box" style="margin-top:1rem"><strong>Comfortable margin.</strong> No need to pinch pennies. Biggest saving lever: lunch at hotel instead of restaurants.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: LOGISTICS -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-logistics">
+  <div class="section-banner">
+    <img src="https://images.unsplash.com/photo-1550435443-33e0d1e69b3e?w=1200&q=75&auto=format&fit=crop&crop=top" alt="Mountain road">
+    <div class="banner-text"><h2>🚗 Getting There<small>Prague → Gerlachov, ~600 km</small></h2></div>
+  </div>
+
+  <div class="content-section">
+    <div class="route-visual">
+      <h4 style="margin-bottom:1rem;color:var(--sky)">🗺️ Route: D1 via Brno + Slovakia</h4>
+      <div class="route-stops">
+        <div class="route-stop"><span class="stop-name">Prague</span><span class="stop-detail">D1 south</span></div>
+        <div class="route-stop"><span class="stop-name">Brno</span><span class="stop-detail">~200 km, 2h</span></div>
+        <div class="route-stop"><span class="stop-name">Trenčín (SK)</span><span class="stop-detail">~330 km, 3.5h · Quick stop by castle</span></div>
+        <div class="route-stop"><span class="stop-name">Žilina → Poprad</span><span class="stop-detail">~560 km, 5.5h</span></div>
+        <div class="route-stop destination"><span class="stop-name">Gerlachov</span><span class="stop-detail">~600 km, 6.5h + 2h stops = 8-9h total</span></div>
+      </div>
+    </div>
+
+    <div class="info-cards">
+      <div class="info-card">
+        <h4>🛣️ Highway Vignettes</h4>
+        <ul>
+          <li><span class="li-icon">🇨🇿</span> Czech 10-day: 300 CZK — <a href="https://edalnice.cz/en/" target="_blank">edalnice.cz</a></li>
+          <li><span class="li-icon">🇸🇰</span> Slovak 30-day: 17.10€ — <a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a></li>
+          <li><span class="li-icon">💡</span> Both electronic — nothing on windshield</li>
+          <li><span class="li-icon">📅</span> SK can be bought 60 days ahead</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>🚗 Required in Car (SK law)</h4>
+        <ul>
+          <li><span class="li-icon">🦺</span> Reflective vests — <strong>4 pcs</strong> (all passengers!)</li>
+          <li><span class="li-icon">⛑</span> First aid kit + warning triangle</li>
+          <li><span class="li-icon">💡</span> Headlights ON at all times (even summer!)</li>
+          <li><span class="li-icon">👶</span> Car seats for both kids (mandatory)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>💳 Money & Cards</h4>
+        <ul>
+          <li><span class="li-icon">💶</span> Slovakia uses <strong>EUR (€)</strong></li>
+          <li><span class="li-icon">💳</span> Cards accepted everywhere</li>
+          <li><span class="li-icon">💵</span> Carry ~100€ cash (stalls, craft vendors)</li>
+          <li><span class="li-icon">📱</span> EU roaming free (CZ → SK)</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h4>📱 Navigation</h4>
+        <ul>
+          <li><span class="li-icon">📡</span> Weak signal in mountain valleys!</li>
+          <li><span class="li-icon">📥</span> Download <strong>Mapy.cz</strong> offline (best for SK)</li>
+          <li><span class="li-icon">📥</span> Download Google Maps offline: "Tatry"</li>
+          <li><span class="li-icon">⚡</span> USB car charger + power bank</li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ─── BUDGET ─── -->
-<section class="section" id="budget">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(232,168,56,0.1)">💰</div>
-    <h2>Budget<small>Total 85,000 CZK (~3,400€)</small></h2>
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: FOOD -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-food">
+  <div class="section-banner" style="background:linear-gradient(135deg,var(--forest),var(--forest-light))">
+    <div class="banner-text"><h2>🍽 Where to Eat<small>Lunch spots near the hotel</small></h2></div>
   </div>
 
-  <div class="budget-grid">
-    <div class="budget-card accent">
-      <div class="b-label">Total Budget</div>
-      <div class="b-value">85,000 CZK</div>
-      <div class="b-note">~3,400€ for 4 people, 9 nights</div>
-    </div>
-    <div class="budget-card">
-      <div class="b-label">Estimated Spend</div>
-      <div class="b-value">73,500 – 77,500 CZK</div>
-      <div class="b-note">~7,500 – 11,500 CZK reserve</div>
-    </div>
-  </div>
-
-  <div class="budget-bar">
-    <div class="budget-bar-fill" style="width:91%; background:linear-gradient(90deg, var(--sky) 0%, var(--water) 66%, var(--meadow) 100%)"></div>
-  </div>
-
-  <div class="budget-breakdown">
-    <div class="budget-row"><span><span class="cat-icon">🏨</span>Accommodation (HB, 9 nights)</span><span class="amount">51,000 CZK</span></div>
-    <div class="budget-row"><span><span class="cat-icon">🍽</span>Lunches at restaurants</span><span class="amount">5,000 – 6,500</span></div>
-    <div class="budget-row"><span><span class="cat-icon">🎟</span>Activities & attractions</span><span class="amount">5,500 – 7,000</span></div>
-    <div class="budget-row"><span><span class="cat-icon">⛽</span>Fuel (Prague ↔ Tatras + trips)</span><span class="amount">3,000 – 3,500</span></div>
-    <div class="budget-row"><span><span class="cat-icon">🍦</span>Snacks, drinks, ice cream</span><span class="amount">2,500 – 3,500</span></div>
-    <div class="budget-row"><span><span class="cat-icon">🅿️</span>Parking</span><span class="amount">800 – 1,200</span></div>
-    <div class="budget-row"><span><span class="cat-icon">🛣</span>Highway vignettes (CZ + SK)</span><span class="amount">725</span></div>
-    <div class="budget-row"><span><span class="cat-icon">🛟</span>Reserve (unexpected)</span><span class="amount">5,000</span></div>
-    <div class="budget-row total"><span>Estimated Total</span><span class="amount">~73,500 – 77,500 CZK</span></div>
-  </div>
-
-  <div class="tip-box" style="margin-top:1rem">
-    <strong>Comfortable margin.</strong> No need to pinch pennies on food or activities. Biggest saving lever: eat lunch at the hotel à la carte instead of restaurants in Lomnica.
-  </div>
-</section>
-
-<!-- ─── LOGISTICS ─── -->
-<section class="section" id="logistics">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(232,93,58,0.1)">🚗</div>
-    <h2>Getting There<small>Prague → Gerlachov, ~600 km</small></h2>
-  </div>
-
-  <div class="route-visual">
-    <h4 style="margin-bottom:1rem; color:var(--sky)">🗺️ Route: D1 via Brno + Slovakia</h4>
-    <div class="route-stops">
-      <div class="route-stop"><span class="stop-name">Prague</span><span class="stop-detail">Start · D1 highway south</span></div>
-      <div class="route-stop"><span class="stop-name">Brno</span><span class="stop-detail">~200 km, 2h · Continue to Břeclav</span></div>
-      <div class="route-stop"><span class="stop-name">Trenčín (SK)</span><span class="stop-detail">~330 km, 3.5h · Quick stop by castle viewpoint</span></div>
-      <div class="route-stop"><span class="stop-name">Žilina → Poprad</span><span class="stop-detail">~560 km, 5.5h · Main Slovak corridor</span></div>
-      <div class="route-stop destination"><span class="stop-name">Gerlachov (Hotel Hubert)</span><span class="stop-detail">~600 km, 6.5h drive + 2h stops = 8-9h total</span></div>
-    </div>
-  </div>
-
-  <div class="info-cards">
-    <div class="info-card">
-      <h4>🛣️ Highway Vignettes</h4>
-      <ul>
-        <li><span class="li-icon">🇨🇿</span> Czech: 10-day, 300 CZK — <a href="https://edalnice.cz/en/" style="color:var(--water)">edalnice.cz</a></li>
-        <li><span class="li-icon">🇸🇰</span> Slovak: 30-day, 17.10€ — <a href="https://eznamka.sk/en/" style="color:var(--water)">eznamka.sk</a></li>
-        <li><span class="li-icon">💡</span> Both fully electronic — nothing on windshield</li>
-        <li><span class="li-icon">📅</span> SK can be bought up to 60 days ahead</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h4>🚗 Required in Car (SK law)</h4>
-      <ul>
-        <li><span class="li-icon">🦺</span> Reflective vests — <strong>4 pcs</strong> (all passengers!)</li>
-        <li><span class="li-icon">⛑</span> First aid kit</li>
-        <li><span class="li-icon">⚠️</span> Warning triangle</li>
-        <li><span class="li-icon">💡</span> Headlights ON at all times (even summer!)</li>
-        <li><span class="li-icon">👶</span> Car seats for both kids (mandatory)</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h4>💳 Money & Cards</h4>
-      <ul>
-        <li><span class="li-icon">💶</span> Slovakia uses <strong>EUR (€)</strong></li>
-        <li><span class="li-icon">💳</span> Cards accepted everywhere (hotels, restaurants, cable cars)</li>
-        <li><span class="li-icon">💵</span> Carry ~100€ cash (small stalls, craft vendors, parking meters)</li>
-        <li><span class="li-icon">📱</span> EU roaming free (CZ → SK)</li>
-      </ul>
-    </div>
-    <div class="info-card">
-      <h4>📱 Navigation Tips</h4>
-      <ul>
-        <li><span class="li-icon">📡</span> Weak signal in mountain valleys!</li>
-        <li><span class="li-icon">📥</span> Download <strong>Mapy.cz</strong> offline (better than Google in SK)</li>
-        <li><span class="li-icon">📥</span> Download Google Maps offline: "Tatry" area</li>
-        <li><span class="li-icon">⚡</span> Bring USB car charger + power bank</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ─── RESTAURANTS ─── -->
-<section class="section" id="restaurants">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(122,182,72,0.1)">🍽</div>
-    <h2>Where to Eat<small>Lunch spots near the hotel</small></h2>
-  </div>
-
-  <div class="restaurant-group">
-    <h4>📍 Tatranská Lomnica (15 min drive)</h4>
-    <div class="restaurant-cards">
-      <div class="rest-card">
-        <div class="rest-name">Humno Tatry</div>
-        <div class="rest-style">Slovak specialties, burgers, steaks</div>
-        <div class="rest-price">12–18€ per main</div>
-        <div class="rest-kids">✅ Kids menu, spacious</div>
-      </div>
-      <div class="rest-card">
-        <div class="rest-name">Koliba Žerucha</div>
-        <div class="rest-style">Traditional Slovak koliba</div>
-        <div class="rest-price">10–15€ per main</div>
-        <div class="rest-kids">✅ Cozy, excellent halušky</div>
-      </div>
-      <div class="rest-card">
-        <div class="rest-name">Furkotka</div>
-        <div class="rest-style">Unique — food served in a wooden trough!</div>
-        <div class="rest-price">8–12€ per main</div>
-        <div class="rest-kids">✅✅ Kids love the presentation. Great hot chocolate!</div>
-      </div>
-      <div class="rest-card">
-        <div class="rest-name">Moment Bistro</div>
-        <div class="rest-style">Modern bistro, 36 seats</div>
-        <div class="rest-price">10–15€ per main</div>
-        <div class="rest-kids">✅ Kids corner, book ahead (small)</div>
-      </div>
-      <div class="rest-card">
-        <div class="rest-name">Restaurácia Stará Mama</div>
-        <div class="rest-style">Homestyle Slovak cooking</div>
-        <div class="rest-price">8–12€ per main</div>
-        <div class="rest-kids">✅ Huge portions</div>
+  <div class="content-section">
+    <div class="restaurant-group">
+      <h4>📍 Tatranská Lomnica (15 min drive)</h4>
+      <div class="restaurant-cards">
+        <div class="rest-card"><div class="rest-name">Humno Tatry</div><div class="rest-style">Slovak specialties, burgers, steaks</div><div class="rest-price">12–18€ per main</div><div class="rest-kids">✅ Kids menu, spacious</div></div>
+        <div class="rest-card"><div class="rest-name">Koliba Žerucha</div><div class="rest-style">Traditional Slovak koliba</div><div class="rest-price">10–15€ per main</div><div class="rest-kids">✅ Cozy, excellent halušky</div></div>
+        <div class="rest-card"><div class="rest-name">Furkotka</div><div class="rest-style">Unique — food in a wooden trough!</div><div class="rest-price">8–12€ per main</div><div class="rest-kids">✅✅ Kids love it. Great hot chocolate!</div></div>
+        <div class="rest-card"><div class="rest-name">Moment Bistro</div><div class="rest-style">Modern bistro, 36 seats</div><div class="rest-price">10–15€ per main</div><div class="rest-kids">✅ Kids corner, book ahead</div></div>
+        <div class="rest-card"><div class="rest-name">Stará Mama</div><div class="rest-style">Homestyle Slovak cooking</div><div class="rest-price">8–12€ per main</div><div class="rest-kids">✅ Huge portions</div></div>
       </div>
     </div>
-  </div>
 
-  <div class="restaurant-group">
-    <h4>📍 Starý Smokovec (20 min drive)</h4>
-    <div class="restaurant-cards">
-      <div class="rest-card">
-        <div class="rest-name">Koliba Kamzík</div>
-        <div class="rest-style">Traditional, mountain views</div>
-        <div class="rest-price">10–15€ per main</div>
-        <div class="rest-kids">✅ Terrace</div>
-      </div>
-      <div class="rest-card">
-        <div class="rest-name">Dobré Časy</div>
-        <div class="rest-style">Pub restaurant, burgers</div>
-        <div class="rest-price">8–12€ per main</div>
-        <div class="rest-kids">✅ Outdoor terrace</div>
+    <div class="restaurant-group">
+      <h4>📍 Starý Smokovec (20 min)</h4>
+      <div class="restaurant-cards">
+        <div class="rest-card"><div class="rest-name">Koliba Kamzík</div><div class="rest-style">Traditional, mountain views</div><div class="rest-price">10–15€</div><div class="rest-kids">✅ Terrace</div></div>
+        <div class="rest-card"><div class="rest-name">Dobré Časy</div><div class="rest-style">Pub, burgers</div><div class="rest-price">8–12€</div><div class="rest-kids">✅ Outdoor terrace</div></div>
       </div>
     </div>
+
+    <div class="restaurant-group">
+      <h4>📍 At the Hotel</h4>
+      <div class="restaurant-cards">
+        <div class="rest-card"><div class="rest-name"><a href="https://www.hotel-hubert.sk/sk" target="_blank">Hotel Hubert</a> à la carte</div><div class="rest-style">Available for lunch 12:00–15:00</div><div class="rest-price">Varies</div><div class="rest-kids">✅ Easiest option — no driving</div></div>
+      </div>
+    </div>
+
+    <div class="tip-box"><strong>Pro tip:</strong> Order for kids immediately — waiting = disaster with a 2.5yo. Bring crayons + paper. Slovak kid favourites: halušky, croquettes, schnitzel, fries.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: WEATHER -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-weather">
+  <div class="section-banner">
+    <img src="https://images.unsplash.com/photo-1676230879995-301613a2e1eb?w=1200&q=75&auto=format&fit=crop" alt="Tatra mountains panorama">
+    <div class="banner-text"><h2>⛅ Weather in August<small>High Tatras typical conditions · <a href="https://www.mountain-forecast.com/peaks/Lomnicky-Stit/forecasts/2634" target="_blank" style="color:rgba(255,255,255,0.8)">Live forecast →</a></small></h2></div>
   </div>
 
-  <div class="tip-box">
-    <strong>Pro tip with kids:</strong> Order for them immediately on arrival — waiting = disaster with a 2.5 year old. Bring crayons + paper. Slovak kid favorites: halušky, croquettes, schnitzel, fries.
-  </div>
-</section>
-
-<!-- ─── WEATHER ─── -->
-<section class="section" id="weather">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(58,143,183,0.1)">⛅</div>
-    <h2>Weather in August<small>High Tatras typical conditions</small></h2>
-  </div>
-
-  <div class="weather-card">
+  <div class="content-section">
     <div class="weather-grid">
       <div class="weather-stat"><span class="ws-icon">🌡️</span><span class="ws-value">22°C</span><span class="ws-label">Valley avg day</span></div>
       <div class="weather-stat"><span class="ws-icon">🏔️</span><span class="ws-value">10–14°C</span><span class="ws-label">At Skalnaté Pleso</span></div>
@@ -1994,303 +1499,185 @@
       <div class="weather-stat"><span class="ws-icon">🌧️</span><span class="ws-value">~14 days</span><span class="ws-label">Rainy days/month</span></div>
     </div>
 
-    <h4 style="margin:1.25rem 0 0.5rem; font-size:0.95rem; color:var(--sky)">⏰ Typical Daily Pattern</h4>
+    <h4 style="margin:1.25rem 0 0.5rem;font-size:0.95rem;color:var(--sky)">⏰ Daily Pattern</h4>
     <div class="weather-pattern">
-      <div class="pattern-block sun"><span class="pb-time">☀️ 6:00–11:00</span><span class="pb-desc">Clear or partly cloudy. Best time for activities!</span></div>
-      <div class="pattern-block cloud"><span class="pb-time">🌥️ 11:00–14:00</span><span class="pb-desc">Clouds build up. Getting overcast.</span></div>
-      <div class="pattern-block storm"><span class="pb-time">⛈️ 14:00–18:00</span><span class="pb-desc">Frequent thunderstorms (30-60 min). Stay low.</span></div>
-      <div class="pattern-block clear"><span class="pb-time">🌅 18:00+</span><span class="pb-desc">Usually clears up. Beautiful sunsets.</span></div>
+      <div class="pattern-block sun"><span class="pb-time">☀️ 6–11 AM</span><span class="pb-desc">Clear/partly cloudy. Best time!</span></div>
+      <div class="pattern-block cloud"><span class="pb-time">🌥️ 11 AM–2 PM</span><span class="pb-desc">Clouds build up.</span></div>
+      <div class="pattern-block storm"><span class="pb-time">⛈️ 2–6 PM</span><span class="pb-desc">Frequent thunderstorms (30-60 min).</span></div>
+      <div class="pattern-block clear"><span class="pb-time">🌅 6 PM+</span><span class="pb-desc">Usually clears. Beautiful sunsets.</span></div>
     </div>
 
-    <div class="highlight-box">
-      <strong>Planning rule:</strong> Main activity in the MORNING (8:00–12:00). Siesta during afternoon storms. Evening = relax at hotel. Cable cars don't run in thunderstorms — check status each morning!
+    <div class="highlight-box"><strong>Plan rule:</strong> Main activity 8:00–12:00. Siesta during storms. Cable cars don't run in storms — check <a href="https://www.vt.sk/en/info/info/cableways-opening-hours" target="_blank">status each morning</a>.</div>
+
+    <h4 style="margin:1.25rem 0 0.5rem;font-size:0.95rem;color:var(--sky)">👕 Layering System</h4>
+    <div class="info-cards">
+      <div class="info-card">
+        <h4>Mountain Outfit</h4>
+        <ul>
+          <li><strong>Base:</strong> T-shirt</li>
+          <li><strong>Mid:</strong> Fleece / hoodie</li>
+          <li><strong>Shell:</strong> Packable rain jacket</li>
+          <li><strong>Legs:</strong> Shorts + long pants (both!)</li>
+          <li><strong>Head:</strong> Sun hat + buff for wind</li>
+          <li><strong>Feet:</strong> Hiking boots + sandals</li>
+        </ul>
+      </div>
     </div>
+    <div class="warning-box"><strong>Always bring a jacket to the mountains</strong> — 25°C in valley can feel like 5°C at Skalnaté Pleso with wind.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: PACKING -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-packing">
+  <div class="section-banner" style="background:linear-gradient(135deg,var(--sunset),#c84a2a)">
+    <div class="banner-text"><h2>🎒 Packing Checklist<small>Tap to check items off — saved automatically</small></h2></div>
   </div>
 
-  <div class="weather-card">
-    <h4 style="margin-bottom:0.75rem; font-size:0.95rem; color:var(--sky)">👕 Layering System</h4>
-    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:0.5rem">
-      <div style="font-size:0.85rem"><strong>Base:</strong> T-shirt</div>
-      <div style="font-size:0.85rem"><strong>Mid:</strong> Fleece / hoodie</div>
-      <div style="font-size:0.85rem"><strong>Shell:</strong> Rain jacket (packable)</div>
-      <div style="font-size:0.85rem"><strong>Legs:</strong> Shorts + long pants (both!)</div>
-      <div style="font-size:0.85rem"><strong>Head:</strong> Sun hat + buff for wind</div>
-      <div style="font-size:0.85rem"><strong>Feet:</strong> Hiking boots + sandals</div>
-    </div>
-    <div class="warning-box" style="margin-top:0.75rem"><strong>Always bring a jacket to the mountains</strong> — even if it's 25°C in the valley, it can feel like 5°C at Skalnaté Pleso with wind.</div>
-  </div>
-</section>
-
-<!-- ─── PACKING ─── -->
-<section class="section" id="packing">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(232,93,58,0.1)">🎒</div>
-    <h2>Packing Checklist<small>Tap to check items off</small></h2>
-  </div>
-
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">📄</span> Documents
-      <span class="cl-count">7 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>National ID cards (passport not needed for SK)</span></label>
+  <div class="content-section">
+    <div class="checklist-section"><div class="checklist-header" onclick="toggleChecklist(this)"><span class="cl-icon">📄</span> Documents <span class="cl-count">7 items</span><svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="checklist-body"><div class="checklist-items">
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>National ID cards</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Driver's license</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Vehicle registration certificate</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Vehicle registration</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Green card (car insurance)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>EHIC cards (blue EU health insurance) — all 4!</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Travel insurance (extended for kids — repatriation!)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>EHIC cards (blue EU health) — all 4!</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Travel insurance (kids — repatriation!)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Health insurance cards</span></label>
-    </div></div>
-  </div>
+    </div></div></div>
 
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">🚗</span> Car
-      <span class="cl-count">7 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Slovak highway vignette (buy at eznamka.sk)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Czech highway vignette (valid?)</span></label>
+    <div class="checklist-section"><div class="checklist-header" onclick="toggleChecklist(this)"><span class="cl-icon">🚗</span> Car <span class="cl-count">7 items</span><svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="checklist-body"><div class="checklist-items">
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Slovak vignette (<a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a>)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Czech vignette (<a href="https://edalnice.cz/en/" target="_blank">edalnice.cz</a>)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Reflective vests — 4 pcs (SK mandatory!)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Warning triangle</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>First aid kit</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Warning triangle + first aid kit</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>USB car charger</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Water canister + snacks for rest stops</span></label>
-    </div></div>
-  </div>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Water + snacks for rest stops</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Barf bags (curvy roads!)</span></label>
+    </div></div></div>
 
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">👶</span> Kids
-      <span class="cl-count">10 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
+    <div class="checklist-section"><div class="checklist-header" onclick="toggleChecklist(this)"><span class="cl-icon">👶</span> Kids <span class="cl-count">10 items</span><svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="checklist-body"><div class="checklist-items">
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Car seats — both!</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Stroller (lightweight, foldable — for Damian)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Baby carrier (for mountains where stroller won't go)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Stroller (lightweight, foldable)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Baby carrier (for mountains)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Stroller rain cover</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Favorite plushies (max 1 each!)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Favourite plushies (max 1 each!)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Pacifier / bottle (Damian)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Spare clothes in car (Damian — accidents happen)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Neoprene socks (pool — slippery floor)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Spare clothes in car (Damian)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Neoprene socks (pool)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Kids' medicine (paracetamol, allergy, nose drops)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Barf bags (car sickness on curvy roads!)</span></label>
-    </div></div>
-  </div>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Tablet + charger + headphones</span></label>
+    </div></div></div>
 
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">👕</span> Clothing (per person)
-      <span class="cl-count">9 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
+    <div class="checklist-section"><div class="checklist-header" onclick="toggleChecklist(this)"><span class="cl-icon">👕</span> Clothing (per person) <span class="cl-count">9 items</span><svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="checklist-body"><div class="checklist-items">
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>9× t-shirts / underwear / socks</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>3× shorts + 2× long pants</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Fleece / hoodie</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Waterproof jacket (MUST HAVE!)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Rain poncho (backup)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Swimsuits (min 2 pairs — one dries, one worn)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Swimsuits (2 pairs)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Pajamas</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Hiking boots + sandals + hotel slippers</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Sun hat + buff / scarf for wind</span></label>
-    </div></div>
-  </div>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Sun hat + buff for wind</span></label>
+    </div></div></div>
 
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">📱</span> Tech
-      <span class="cl-count">5 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Tablet + charger (essential for road trip!)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Power bank (fully charged)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Phone chargers</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Headphones (tablet in car — don't disturb driver)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Camera / GoPro (optional)</span></label>
-    </div></div>
-  </div>
-
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">🎒</span> Outdoor Gear
-      <span class="cl-count">9 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Daypack (30L — one parent carries for trips)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Thermos (hot tea for mountains)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Water bottles (refillable) × 2</span></label>
+    <div class="checklist-section"><div class="checklist-header" onclick="toggleChecklist(this)"><span class="cl-icon">🎒</span> Outdoor + Tech + First Aid <span class="cl-count">14 items</span><svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg></div><div class="checklist-body"><div class="checklist-items">
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Daypack (30L)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Thermos + 2× water bottles</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Sunscreen SPF 50 (kids!)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Sunglasses (for kids too)</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Hats / caps × 4</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Bug repellent</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Tick removal tweezers</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Wet wipes + crayons + paper (for restaurant waits)</span></label>
-    </div></div>
-  </div>
-
-  <div class="checklist-section">
-    <div class="checklist-header" onclick="toggleChecklist(this)">
-      <span class="cl-icon">🩺</span> First Aid
-      <span class="cl-count">8 items</span>
-      <svg class="chevron" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
-    </div>
-    <div class="checklist-body"><div class="checklist-items">
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Kids' paracetamol (suppositories + syrup)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Adult ibuprofen</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Bug repellent + tick tweezers</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Wet wipes + crayons + paper</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Power bank (fully charged)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Phone chargers</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Kids' paracetamol + ibuprofen</span></label>
       <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Band-aids, bandage, disinfectant</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Antihistamine (Zyrtec — allergies, insect bites)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>After-sun / burn cream</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Nose drops for kids (in case of cold)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Smecta / Imodium (travel diarrhea)</span></label>
-      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Tick removal tweezers</span></label>
-    </div></div>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Antihistamine (Zyrtec)</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>After-sun cream</span></label>
+      <label class="checklist-item"><input type="checkbox" onchange="toggleCheck(this)"><span>Smecta / Imodium</span></label>
+    </div></div></div>
   </div>
-</section>
+</div>
 
-<!-- ─── EMERGENCY ─── -->
-<section class="section" id="emergency">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(232,93,58,0.1)">🆘</div>
-    <h2>Emergency Contacts<small>Save these numbers</small></h2>
-  </div>
-
-  <div class="sos-grid">
-    <div class="sos-card"><span class="sos-icon">🚨</span><div><span class="sos-label">Emergency (SK)</span><br><a class="sos-number" href="tel:112">112</a></div></div>
-    <div class="sos-card"><span class="sos-icon">🏔</span><div><span class="sos-label">Mountain Rescue</span><br><a class="sos-number" href="tel:18300">18 300</a></div></div>
-    <div class="sos-card"><span class="sos-icon">🏥</span><div><span class="sos-label">Hospital Poprad (24/7)</span><br><a class="sos-number" href="tel:+421527121111">+421 52 712 11 11</a></div></div>
-    <div class="sos-card"><span class="sos-icon">💊</span><div><span class="sos-label">Pharmacy Dr. Max (Poprad)</span><br><span class="sos-number" style="font-size:0.85rem">Open until 20:00</span></div></div>
-    <div class="sos-card"><span class="sos-icon">🏨</span><div><span class="sos-label">Hotel Hubert Reception</span><br><a class="sos-number" href="tel:+421524181108">+421 52 418 11 08</a></div></div>
+<!-- ═══════════════════════════════════════════ -->
+<!-- TAB: INFO (Emergency + Links + TODO) -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="tab-panel" id="tab-info">
+  <div class="section-banner" style="background:linear-gradient(135deg,#c0392b,#e74c3c)">
+    <div class="banner-text"><h2>🆘 Emergency, Links & To-Do<small>Important contacts and bookmarks</small></h2></div>
   </div>
 
-  <div class="warning-box" style="margin-top:1rem">
-    <strong>Ticks are active in summer!</strong> Check kids after every forest walk (especially hair, behind ears, groin). Bring tick removal tweezers. Consider tick-borne encephalitis vaccination — ask pediatrician.
-  </div>
-</section>
+  <div class="content-section">
+    <h3 style="font-family:'Playfair Display',serif;color:var(--sky);margin-bottom:1rem">Emergency Contacts</h3>
+    <div class="sos-grid">
+      <div class="sos-card"><span class="sos-icon">🚨</span><div><span class="sos-label">Emergency (SK)</span><br><a class="sos-number" href="tel:112">112</a></div></div>
+      <div class="sos-card"><span class="sos-icon">🏔</span><div><span class="sos-label">Mountain Rescue</span><br><a class="sos-number" href="tel:18300">18 300</a></div></div>
+      <div class="sos-card"><span class="sos-icon">🏥</span><div><span class="sos-label">Hospital Poprad (24/7)</span><br><a class="sos-number" href="tel:+421527121111">+421 52 712 11 11</a></div></div>
+      <div class="sos-card"><span class="sos-icon">💊</span><div><span class="sos-label">Pharmacy Dr. Max (Poprad)</span><br><span class="sos-number" style="font-size:0.85rem">Open until 20:00</span></div></div>
+      <div class="sos-card"><span class="sos-icon">🏨</span><div><span class="sos-label">Hotel Hubert</span><br><a class="sos-number" href="tel:+421524181108">+421 52 418 11 08</a></div></div>
+    </div>
 
-<!-- ─── TODO ─── -->
-<section class="section" id="todo">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(122,182,72,0.1)">✅</div>
-    <h2>Before We Go<small>Action items</small></h2>
-  </div>
+    <div class="warning-box" style="margin-top:1rem"><strong>Ticks are active in summer!</strong> Check kids after forest walks (hair, ears, groin). Bring tick tweezers. Ask pediatrician about TBE vaccination.</div>
 
-  <div class="todo-list">
-    <div class="todo-item done-item"><div class="todo-status done">✓</div><span class="todo-text">Choose base location → Tatranská Lomnica / Stará Lesná</span></div>
-    <div class="todo-item done-item"><div class="todo-status done">✓</div><span class="todo-text">Choose hotel → Hotel Hubert Vital Resort ★★★★</span></div>
-    <div class="todo-item done-item"><div class="todo-status done">✓</div><span class="todo-text">Confirm dates → Aug 10–19, 2026</span></div>
-    <div class="todo-item"><div class="todo-status pending">!</div><span>Book the hotel — call +421 52 418 11 08 (Best Available Rate with free cancellation)</span></div>
-    <div class="todo-item"><div class="todo-status pending">!</div><span>Buy Slovak highway vignette — <a href="https://eznamka.sk/en/" style="color:var(--water)">eznamka.sk</a> (30-day, 17.10€)</span></div>
-    <div class="todo-item"><div class="todo-status pending">!</div><span>Buy Skalnaté Pleso gondola tickets via <a href="https://www.gopass.travel/" style="color:var(--water)">GOPASS</a> (cheaper in advance!)</span></div>
-    <div class="todo-item"><div class="todo-status pending">!</div><span>Book Tricklandia time slot — <a href="https://www.tricklandia.sk/" style="color:var(--water)">tricklandia.sk</a></span></div>
-    <div class="todo-item"><div class="todo-status pending">!</div><span>Check Bricklandia location for Aug 2026 — <a href="https://bricklandia.sk/" style="color:var(--water)">bricklandia.sk</a></span></div>
-    <div class="todo-item"><div class="todo-status pending">!</div><span>Download offline maps — Mapy.cz (Slovakia) + Google Maps (Tatry area)</span></div>
-  </div>
-</section>
+    <h3 style="font-family:'Playfair Display',serif;color:var(--sky);margin:2rem 0 1rem">✅ Before We Go</h3>
+    <div class="todo-list">
+      <div class="todo-item done-item"><div class="todo-status done">✓</div><span class="todo-text">Choose base → Tatranská Lomnica area</span></div>
+      <div class="todo-item done-item"><div class="todo-status done">✓</div><span class="todo-text">Choose hotel → Hotel Hubert ★★★★</span></div>
+      <div class="todo-item done-item"><div class="todo-status done">✓</div><span class="todo-text">Confirm dates → Aug 10–19, 2026</span></div>
+      <div class="todo-item"><div class="todo-status pending">!</div><span>Book hotel — call <a href="tel:+421524181108">+421 52 418 11 08</a></span></div>
+      <div class="todo-item"><div class="todo-status pending">!</div><span>Buy SK vignette — <a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a></span></div>
+      <div class="todo-item"><div class="todo-status pending">!</div><span>Buy gondola tickets — <a href="https://www.gopass.travel/" target="_blank">gopass.travel</a></span></div>
+      <div class="todo-item"><div class="todo-status pending">!</div><span>Book Tricklandia — <a href="https://www.tricklandia.sk/" target="_blank">tricklandia.sk</a></span></div>
+      <div class="todo-item"><div class="todo-status pending">!</div><span>Check Bricklandia location for Aug — <a href="https://bricklandia.sk/" target="_blank">bricklandia.sk</a></span></div>
+      <div class="todo-item"><div class="todo-status pending">!</div><span>Download offline maps — Mapy.cz (Slovakia) + Google Maps (Tatry)</span></div>
+    </div>
 
-<!-- ─── LINKS ─── -->
-<section class="section" id="links">
-  <div class="section-header">
-    <div class="section-icon" style="background:rgba(42,90,150,0.1)">🔗</div>
-    <h2>Useful Links<small>Bookmarks for the trip</small></h2>
+    <h3 style="font-family:'Playfair Display',serif;color:var(--sky);margin:2rem 0 1rem">🔗 Useful Links</h3>
+    <div class="links-grid">
+      <a class="link-card" href="https://www.hotel-hubert.sk/sk" target="_blank"><span class="link-icon">🏨</span><div><span class="link-name">Hotel Hubert</span><span class="link-desc">Our hotel</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.gopass.travel/" target="_blank"><span class="link-icon">🎟</span><div><span class="link-name">GOPASS</span><span class="link-desc">Cable car tickets</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.vt.sk/en/info/info/cableways-opening-hours" target="_blank"><span class="link-icon">🚠</span><div><span class="link-name">Cable Car Status</span><span class="link-desc">Live status + webcams</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.tricklandia.sk/" target="_blank"><span class="link-icon">🎨</span><div><span class="link-name">Tricklandia</span><span class="link-desc">Illusion gallery — book ahead</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.tatrabob.sk/" target="_blank"><span class="link-icon">🎢</span><div><span class="link-name">Tatrabob</span><span class="link-desc">Alpine bobsled</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://eznamka.sk/en/" target="_blank"><span class="link-icon">🛣</span><div><span class="link-name">eZnámka SK</span><span class="link-desc">Highway vignette</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.skanzenpribylina.sk/en/homepage" target="_blank"><span class="link-icon">🏛</span><div><span class="link-name">Skanzen Pribylina</span><span class="link-desc">Open-air museum</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.hradlubovna.sk/" target="_blank"><span class="link-icon">🏰</span><div><span class="link-name">Stará Ľubovňa</span><span class="link-desc">Castle + museum</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.kezmarok.com/" target="_blank"><span class="link-icon">🏰</span><div><span class="link-name">Kežmarok Castle</span><span class="link-desc">Castle + UNESCO church</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://www.mountain-forecast.com/peaks/Lomnicky-Stit/forecasts/2634" target="_blank"><span class="link-icon">🌤</span><div><span class="link-name">Mountain Forecast</span><span class="link-desc">Detailed weather</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://cp.sk/" target="_blank"><span class="link-icon">🚂</span><div><span class="link-name">CP.sk</span><span class="link-desc">Train timetable</span></div><span class="arrow">→</span></a>
+      <a class="link-card" href="https://bricklandia.sk/" target="_blank"><span class="link-icon">🧱</span><div><span class="link-name">Bricklandia</span><span class="link-desc">LEGO exhibition</span></div><span class="arrow">→</span></a>
+    </div>
   </div>
-
-  <div class="links-grid">
-    <a class="link-card" href="https://www.hotel-hubert.sk/sk" target="_blank" rel="noopener"><span class="link-icon">🏨</span><div><span class="link-name">Hotel Hubert</span><span class="link-desc">Our hotel website</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://www.gopass.travel/" target="_blank" rel="noopener"><span class="link-icon">🎟</span><div><span class="link-name">GOPASS</span><span class="link-desc">Cable car tickets (buy early!)</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://www.vt.sk/en/info/info/cableways-opening-hours" target="_blank" rel="noopener"><span class="link-icon">🚠</span><div><span class="link-name">Cable Car Status</span><span class="link-desc">Live status + webcams</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://www.tricklandia.sk/" target="_blank" rel="noopener"><span class="link-icon">🎨</span><div><span class="link-name">Tricklandia</span><span class="link-desc">Optical illusion gallery — book ahead</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://eznamka.sk/en/" target="_blank" rel="noopener"><span class="link-icon">🛣</span><div><span class="link-name">eZnámka SK</span><span class="link-desc">Slovak highway vignette</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://www.skanzenpribylina.sk/en/homepage" target="_blank" rel="noopener"><span class="link-icon">🏛</span><div><span class="link-name">Skanzen Pribylina</span><span class="link-desc">Open-air museum</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://www.hradlubovna.sk/" target="_blank" rel="noopener"><span class="link-icon">🏰</span><div><span class="link-name">Stará Ľubovňa Castle</span><span class="link-desc">Castle + open-air museum</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://www.mountain-forecast.com/peaks/Lomnicky-Stit/forecasts/2634" target="_blank" rel="noopener"><span class="link-icon">🌤</span><div><span class="link-name">Mountain Forecast</span><span class="link-desc">Detailed mountain weather</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://cp.sk/" target="_blank" rel="noopener"><span class="link-icon">🚂</span><div><span class="link-name">CP.sk</span><span class="link-desc">Tatra Electric Railway timetable</span></div><span class="arrow">→</span></a>
-    <a class="link-card" href="https://bricklandia.sk/" target="_blank" rel="noopener"><span class="link-icon">🧱</span><div><span class="link-name">Bricklandia</span><span class="link-desc">LEGO exhibition — check location!</span></div><span class="arrow">→</span></a>
-  </div>
-</section>
-
-</main>
+</div>
 
 <footer class="footer">
   <span class="footer-emoji">🏔️</span>
-  Tatras 2026 — An adventure awaits!<br>
-  <span style="font-size:0.75rem; opacity:0.6">Made with love for Katka</span>
+  Mountains 2026 — An adventure awaits!<br>
+  <span style="font-size:0.75rem;opacity:0.6">Made with love for Katka</span>
 </footer>
 
 <script>
-// Generate stars
-(function() {
-  const container = document.getElementById('stars');
-  for (let i = 0; i < 60; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.animationDelay = Math.random() * 3 + 's';
-    star.style.width = star.style.height = (Math.random() * 2 + 1) + 'px';
-    container.appendChild(star);
-  }
-})();
+(function(){const s=document.getElementById('stars');for(let i=0;i<50;i++){const d=document.createElement('div');d.className='star';d.style.left=Math.random()*100+'%';d.style.top=Math.random()*100+'%';d.style.animationDelay=Math.random()*3+'s';d.style.width=d.style.height=(Math.random()*2+1)+'px';s.appendChild(d)}})();
 
-// Day card toggle
-function toggleDay(header) {
-  header.parentElement.classList.toggle('open');
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:document.getElementById('tabs').offsetTop,behavior:'smooth'});
 }
 
-// Checklist toggle
-function toggleChecklist(header) {
-  header.parentElement.classList.toggle('open');
+function toggleDay(h){h.parentElement.classList.toggle('open')}
+function toggleChecklist(h){h.parentElement.classList.toggle('open')}
+
+function toggleCheck(cb){
+  cb.parentElement.classList.toggle('checked',cb.checked);
+  const c=[];document.querySelectorAll('.checklist-item input').forEach((x,i)=>{if(x.checked)c.push(i)});
+  try{localStorage.setItem('mtn-checklist',JSON.stringify(c))}catch(e){}
 }
 
-// Checkbox styling
-function toggleCheck(cb) {
-  cb.parentElement.classList.toggle('checked', cb.checked);
-  saveChecklist();
-}
-
-// Save checklist state
-function saveChecklist() {
-  const checks = [];
-  document.querySelectorAll('.checklist-item input').forEach((cb, i) => {
-    if (cb.checked) checks.push(i);
-  });
-  try { localStorage.setItem('tatry-checklist', JSON.stringify(checks)); } catch(e) {}
-}
-
-// Load checklist state
-(function() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('tatry-checklist') || '[]');
-    document.querySelectorAll('.checklist-item input').forEach((cb, i) => {
-      if (saved.includes(i)) {
-        cb.checked = true;
-        cb.parentElement.classList.add('checked');
-      }
-    });
-  } catch(e) {}
-})();
-
-// Smooth nav active state
-const sections = document.querySelectorAll('.section[id]');
-const navLinks = document.querySelectorAll('.nav a');
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(l => l.classList.remove('active'));
-      const link = document.querySelector(`.nav a[href="#${entry.target.id}"]`);
-      if (link) link.classList.add('active');
-    }
-  });
-}, { rootMargin: '-20% 0px -75% 0px' });
-
-sections.forEach(s => observer.observe(s));
+(function(){try{const s=JSON.parse(localStorage.getItem('mtn-checklist')||'[]');document.querySelectorAll('.checklist-item input').forEach((cb,i)=>{if(s.includes(i)){cb.checked=true;cb.parentElement.classList.add('checked')}})}catch(e){}})();
 </script>
 
 </body>
