@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Family trip plan: High Tatras, Slovakia — Aug 10–19, 2026. Itinerary, budget, packing lists, and logistics for 2 adults + 2 kids.">
+<meta name="theme-color" content="#2a2520">
 <title>Mountains 2026</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,700;9..144,900&family=JetBrains+Mono:wght@400;600&display=swap');
@@ -28,6 +30,15 @@
 
   *{margin:0;padding:0;box-sizing:border-box}
   html{scroll-behavior:smooth}
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{
+      animation-duration:0.01ms !important;
+      animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important;
+    }
+  }
 
   body{
     font-family:'Space Grotesk',system-ui,sans-serif;
@@ -107,6 +118,7 @@
 
   .hero-stat{
     background:rgba(255,255,255,0.08);
+    -webkit-backdrop-filter:blur(12px);
     backdrop-filter:blur(12px);
     padding:12px 18px;
     color:#fff;
@@ -524,6 +536,7 @@
   }
 
   .cl-head:hover{background:var(--bg2)}
+  .quest-head:focus-visible,.cl-head:focus-visible{outline:2px solid var(--slate);outline-offset:-2px;border-radius:var(--r)}
   .cl-head .cnt{margin-left:auto;font-size:0.72rem;font-weight:400;color:var(--ink2)}
 
   .cl-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease}
@@ -700,7 +713,7 @@
 <section class="hero">
   <div class="hero-img"></div>
   <div class="hero-content">
-    <div class="hero-pill">Confirmed</div>
+    <div class="hero-pill">Plan ready · booking pending</div>
     <h1>Mountains<em>High Tatras &middot; August 2026</em></h1>
     <div class="hero-stats">
       <div class="hero-stat"><b>Aug 10–19</b>9 nights</div>
@@ -747,7 +760,7 @@
         <div class="quest-day" style="background:var(--ink2)"><small>day</small>0</div>
         <div class="quest-mid">
           <div class="quest-title">Arrival — Prague to Gerlachov</div>
-          <div class="quest-sub">Mon Aug 10 · 600 km · 8-9h with kids</div>
+          <div class="quest-sub">Mon Aug 10 · 600 km · 9–9.5h with kids</div>
           <div class="quest-tags"><span class="qt qt-slate">road trip</span></div>
         </div>
         <svg class="chev" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"></polyline></svg>
@@ -1065,9 +1078,9 @@
   <div style="margin-top:1rem">
     <div class="budget-hero">
       <div class="bh-card dark"><div class="bh-label">Budget</div><div class="bh-val">85,000 CZK</div><div class="bh-note">~3,400€ · 4 people · 9 nights</div></div>
-      <div class="bh-card light"><div class="bh-label">Estimated spend</div><div class="bh-val" style="color:var(--amber)">73,500–77,500</div><div class="bh-note">7,500–11,500 CZK leftover</div></div>
+      <div class="bh-card light"><div class="bh-label">Estimated spend</div><div class="bh-val" style="color:var(--amber)">73,500–78,500</div><div class="bh-note">6,500–11,500 CZK leftover</div></div>
     </div>
-    <div class="budget-meter"><div class="budget-fill" style="width:91%"></div></div>
+    <div class="budget-meter" title="Worst-case estimate ≈ 92% of budget"><div class="budget-fill" style="width:92%"></div></div>
     <div class="budget-rows">
       <div class="brow"><span>🏨 Accommodation (HB, 9 nights)</span><span class="amt">51,000</span></div>
       <div class="brow"><span>🍽 Lunches</span><span class="amt">5,000–6,500</span></div>
@@ -1075,9 +1088,9 @@
       <div class="brow"><span>⛽ Fuel (~1,710 km)</span><span class="amt">3,000–3,500</span></div>
       <div class="brow"><span>🍦 Snacks, drinks</span><span class="amt">2,500–3,500</span></div>
       <div class="brow"><span>🅿️ Parking</span><span class="amt">800–1,200</span></div>
-      <div class="brow"><span>🛣 Vignettes (<a href="https://edalnice.cz/en/" target="_blank">CZ</a>+<a href="https://eznamka.sk/en/" target="_blank">SK</a>)</span><span class="amt">725</span></div>
+      <div class="brow"><span>🛣 Vignettes, 10-day (<a href="https://edalnice.cz/en/" target="_blank">CZ</a>+<a href="https://eznamka.sk/en/" target="_blank">SK</a>)</span><span class="amt">~570</span></div>
       <div class="brow"><span>🛟 Reserve</span><span class="amt">5,000</span></div>
-      <div class="brow total"><span>Total</span><span class="amt">~73,500–77,500</span></div>
+      <div class="brow total"><span>Total</span><span class="amt">~73,500–78,500</span></div>
     </div>
   </div>
 </div>
@@ -1095,13 +1108,13 @@
         <div class="rs"><span class="rs-name">Brno</span><span class="rs-detail">~200 km, 2h</span></div>
         <div class="rs"><span class="rs-name">Trenčín</span><span class="rs-detail">~330 km, 3.5h</span></div>
         <div class="rs"><span class="rs-name">Žilina → Poprad</span><span class="rs-detail">~560 km, 5.5h</span></div>
-        <div class="rs end"><span class="rs-name">Gerlachov</span><span class="rs-detail">~600 km · 6.5h + 2h stops = 8-9h</span></div>
+        <div class="rs end"><span class="rs-name">Gerlachov</span><span class="rs-detail">~600 km · 6.5h + 2.5h stops ≈ 9h (7:00 → ~16:00)</span></div>
       </div>
     </div>
     <div class="info-grid">
       <div class="info-box"><h4>Highway vignettes</h4><ul>
         <li>🇨🇿 Czech 10-day: 300 CZK — <a href="https://edalnice.cz/en/" target="_blank">edalnice.cz</a></li>
-        <li>🇸🇰 Slovak 30-day: 17.10€ — <a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a></li>
+        <li>🇸🇰 Slovak 10-day: 10.80€, covers Aug 10–19 exactly — <a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a></li>
         <li>Both electronic, buy online</li>
       </ul></div>
       <div class="info-box"><h4>Required in car (SK)</h4><ul>
@@ -1274,7 +1287,7 @@
       <div class="todo-row struck"><div class="todo-dot ok">✓</div><span>Choose hotel → Hotel Hubert ★★★★</span></div>
       <div class="todo-row struck"><div class="todo-dot ok">✓</div><span>Dates → Aug 10–19</span></div>
       <div class="todo-row"><div class="todo-dot wait">!</div><span>Book hotel — <a href="tel:+421524181108">call +421 52 418 11 08</a></span></div>
-      <div class="todo-row"><div class="todo-dot wait">!</div><span>SK vignette — <a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a></span></div>
+      <div class="todo-row"><div class="todo-dot wait">!</div><span>SK vignette (10-day 10.80€, buyable 60 days ahead) — <a href="https://eznamka.sk/en/" target="_blank">eznamka.sk</a></span></div>
       <div class="todo-row"><div class="todo-dot wait">!</div><span>Gondola tickets — <a href="https://www.gopass.travel/" target="_blank">gopass.travel</a></span></div>
       <div class="todo-row"><div class="todo-dot wait">!</div><span>Book Tricklandia — <a href="https://www.tricklandia.sk/" target="_blank">tricklandia.sk</a></span></div>
       <div class="todo-row"><div class="todo-dot wait">!</div><span>Check Bricklandia for Aug — <a href="https://bricklandia.sk/" target="_blank">bricklandia.sk</a></span></div>
@@ -1309,14 +1322,53 @@ function go(id,btn){
   btn.classList.add('on');
   window.scrollTo({top:document.getElementById('tabs').offsetTop,behavior:'smooth'});
 }
-function tog(h){h.closest('.quest').classList.toggle('open')}
-function clk(h){h.closest('.cl-group').classList.toggle('open')}
+function tog(h){
+  var open=h.closest('.quest').classList.toggle('open');
+  h.setAttribute('aria-expanded',open);
+}
+function clk(h){
+  var open=h.closest('.cl-group').classList.toggle('open');
+  h.setAttribute('aria-expanded',open);
+}
+
+// Keyboard access for collapsible headers
+document.querySelectorAll('.quest-head,.cl-head').forEach(function(h){
+  h.setAttribute('role','button');
+  h.setAttribute('tabindex','0');
+  h.setAttribute('aria-expanded','false');
+  h.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();h.click()}
+  });
+});
+
+function itemKey(cb){return cb.closest('.cl-item').querySelector('label').textContent.trim()}
+
 function chk(cb){
   cb.closest('.cl-item').classList.toggle('done',cb.checked);
-  var c=[];document.querySelectorAll('.cl-item input').forEach(function(x,i){if(x.checked)c.push(i)});
-  try{localStorage.setItem('mtn2',JSON.stringify(c))}catch(e){}
+  var c=[];document.querySelectorAll('.cl-item input').forEach(function(x){if(x.checked)c.push(itemKey(x))});
+  try{localStorage.setItem('mtn3',JSON.stringify(c))}catch(e){}
+  cnts();
 }
-(function(){try{var s=JSON.parse(localStorage.getItem('mtn2')||'[]');document.querySelectorAll('.cl-item input').forEach(function(cb,i){if(s.indexOf(i)>-1){cb.checked=true;cb.closest('.cl-item').classList.add('done')}})}catch(e){}})();
+
+// Live packed counts per group
+function cnts(){
+  document.querySelectorAll('.cl-group').forEach(function(g){
+    var all=g.querySelectorAll('.cl-item input').length;
+    var done=g.querySelectorAll('.cl-item input:checked').length;
+    var c=g.querySelector('.cnt');
+    if(c)c.textContent=done?done+'/'+all:all;
+  });
+}
+
+(function(){
+  try{
+    var s=JSON.parse(localStorage.getItem('mtn3')||'[]');
+    document.querySelectorAll('.cl-item input').forEach(function(cb){
+      if(s.indexOf(itemKey(cb))>-1){cb.checked=true;cb.closest('.cl-item').classList.add('done')}
+    });
+  }catch(e){}
+  cnts();
+})();
 </script>
 </body>
 </html>
